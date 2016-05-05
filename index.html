@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="utf-8">
+  <title>Calculadora</title>
+  <meta name="description" content="App Calculadora">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="assets/css/custom.css">
+
+  <!-- JS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+
+
+  <!-- FAVICON  -->
+  <link rel="icon" type="image/png" href="http://www.jmcprl.net/GIF%20ANI3/TERMOMETRO.GIF">
+
+</head>
+<body>
+
+  <div class="container app">
+    <h4> Conversor</h4>
+    <div class="row">
+      <div class="one-half column">
+        <p>Este conversor permite hacer conversiones de Temperaturas (Celsius, Farenheit y Kelvin) y tambien permite conversiones de medidas(Metros a pulgada)  Ejemplo: 23C to K, 12M to p</p>
+        <label>Introduzca el valor :</label>
+        <!--input id="convert" class="u-full-width" type="text" autofocus oninput="convertir();" placeholder="50Farenheit to Kelvin"-->
+
+        <!--input id="convert" class="u-full-width" type="text" autofocus onchange="convertir();" placeholder="50Farenheit to Kelvin"-->
+        <td>
+                  <!--input id="original" autofocus onchange="calculate();" placeholder="32F" size="50"-->
+                <form id="formulario" onsubmit="return main();">
+                  <input id="convert"
+                         placeholder="32F"
+                         size="50"
+                         title = "Escribe un número seguido de una de las letras 'F' o 'C'"
+                         autofocus
+                  />
+                </form>
+        </td>
+        <tr>
+            <th>Converted Temperature:</th>
+            <span id="converted"></span>
+        </tr>
+        <!--span id="converted"></span-->
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="one-half column">
+        <span class="imag-pru"></span>
+      </div>
+    </div>
+  </div>
+
+  <footer><!--pie de pagina-->
+      <div class="container">
+        <div class="row">
+          <div id="pie_1" class="one-half column ">
+            <a href="http://alu0100836059.github.io/pagina_personal">"    Web Personal de Jacobo"</a>
+          </div>
+          <div id="pie_2" class="one-half column">
+            <a href="https://github.com/noe-jacoboDSI/mocha_chai_definitivo">"Repositorio de la organización"</a>
+          </div>
+          <div id="pie_3" class="one-half column">
+            <a href="http://dsi1516.github.io/Practica1">"Web Personal de Noé"</a>
+          </div>
+          <div id="desplazar" class="one-half column">
+            <a href="http://noe-jacobodsi.github.io/mocha_chai_definitivo/test/test.html">"Test"</a>
+          </div>
+
+        </div>
+      </div>
+  </footer>
+</body>
+</html>
