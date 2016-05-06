@@ -20,4 +20,4 @@ console.log("->"+digito);
             num_screen += digito; //añadimos y guardamos
             }
          flag_num = 0; //el número está iniciado y podemos ampliarlo.
-         }
+         }//
