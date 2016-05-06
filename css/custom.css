@@ -1,0 +1,12 @@
+body{
+    background-image: url("http://img.webme.com/pic/p/procssdesign/bg-1.jpg");
+}
+
+body .container {
+    background-color: white;
+    width: 40%;
+    margin: auto;
+}
+body .pantalla {
+    position: center;
+}
