@@ -16,11 +16,13 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/generado_SASS.css">
 
   <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="js/calc.js"></script>
 
   <!-- FAVICON  -->
   <link rel="icon" type="image/png" href="http://www.favicon.cc/logo3d/538432.png">
@@ -30,52 +32,60 @@
 
   <div class="container">
     <h4> Calculadora</h4>
-    <div class="pantalla">
-        <textarea class = "screen" cols = "74" rows = "10" id="original"></textarea>
-    </div>
-    <div class="teclas">
+   <form action="#" name="calculadora" id="calculadora">
+    <!--div class="pantalla"-->
+        <p id="screen">0</p>
+    <!--/div-->
+   <!-- <div class="teclas">
       <table>
   
         <tr>
           
-          <td><button class ="tipo_numeros" type="button" id="imaginarios">i</button></td>
-          <td><button class ="tipo_numeros" type="button" id="reales">R</button></td>
-          <td><button class ="tipo_numeros" type="button" id="radianes">rad</button></td>
+          <td><input  class ="tipo_numeros" type="button" id="imaginarios" value="i" /></td>
+          <td><input class ="tipo_numeros" type="button" id="reales" value="R" /></td>
+          <td><input class ="tipo_numeros" type="button" id="radianes" value="rad" /></td>
           
           
         </tr>
         <tr>
-          <td><button class ="numeros" type="button" id="num_7">7</button></td>
-          <td><button class ="numeros" type="button" id="num_8">8</button></td>
-          <td><button class ="numeros" type="button" id="num_9">9</button></td>
-          <td><button class ="simbolos" type="button" id="AC">AC</button></td>
-          <td><button class ="simbolos" type="button" id="DEL">DEL</button></td>
+          <td><input class ="numeros" type="button" id="num_7" value="7" onclick="numero(7)" /></td>
+          <td><input class ="numeros" type="button" id="num_8" value="8" onclick="numero(8)" /></td>
+          <td><input class ="numeros" type="button" id="num_9" value="9" onclick="numero(9)" /></td>
+          <td><input class ="simbolos" type="button" id="AC" value="AC" /></td>
+          <td><input class ="simbolos" type="button" id="DEL" value="DEL" /></td>
         </tr>
         <tr>
-          <td><button class ="numeros" type="button" id="num_4">4</button></td>
-          <td><button class ="numeros" type="button" id="num_5">5</button></td>
-          <td><button class ="numeros" type="button" id="num_6">6</button></td>
-          <td><button class ="simbolos" type="button" id="multiplicacion">x</button></td>
-          <td><button class ="simbolos" type="button" id="division">/</button></td>
+          <td><input class ="numeros" type="button" id="num_4" value="4" onclick="numero(4)" /></td>
+          <td><input class ="numeros" type="button" id="num_5" value="5" onclick="numero(5)" /></td>
+          <td><input class ="numeros" type="button" id="num_6" value="6" onclick="numero(6)" /></td>
+          <td><input class ="simbolos" type="button" id="multiplicacion" value="x"></td>
+          <td><input class ="simbolos" type="button" id="division" value="/"></td>
         </tr>
         <tr>
-          <td><button class ="numeros" type="button" id="num_1">1</button></td>
-          <td><button class ="numeros" type="button" id="num_2">2</button></td>
-          <td><button class ="numeros" type="button" id="num_3">3</button></td>
-          <td><button class ="simbolos" type="button" id="mas">+</button></td>
-          <td><button class ="simbolos" type="button" id="menos">-</button></td>
+          <td><input class ="numeros" type="button" id="num_1" value="1" onclick="numero(1)" /></td>
+          <td><input class ="numeros" type="button" id="num_2" value="2" onclick="numero(2)" /></td>
+          <td><input class ="numeros" type="button" id="num_3" value="3" onclick="numero(3)" /></td>
+          <td><input class ="simbolos" type="button" id="mas" value="+"></td>
+          <td><input class ="simbolos" type="button" id="menos" value="-"></td>
         </tr>
         <tr>
-          <td><button class ="numeros" type="button" id="num_0">0</button></td>
-          <td><button class ="simbolos" type="button" id="mas_menos">+/-</button></td>
-          <td><button class ="simbolos" type="button" id="punto">.</button></td>
-          <td><button class ="numeros" type="button" id="num_1">...</button></td>
-          <td><button class ="simbolos" type="button" id="igual">=</button></td>
+          <td><input class ="numeros" type="button" id="num_0" value="0" onclick="numero(0)" /></td>
+          <td><input class ="simbolos" type="button" id="mas_menos" value="+/-"></td>
+          <td><input class ="simbolos" type="button" id="punto" value="."></td>
+          <td><input class ="numeros" type="button" id="num_1" value="..."></td>
+          <td><input class ="simbolos" type="button" id="igual" value="="></td>
         </tr>
       </table>
-    </div>
+    </div>-->
+    <div></div>
+      <p>
+          <input type="button"  value="1" onclick="numero('1')" />
+          <input type="button"  value="2" onclick="numero('2')" />
+          <input type="button"  value="3" onclick="numero('3')" />
+        </p>
+    </form>
   </div>
 
   
 </body>
-</html>
+</html><!---->
