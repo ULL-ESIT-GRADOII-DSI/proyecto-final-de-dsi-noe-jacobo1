@@ -1,14 +1,10 @@
-body {
-  /*background-image: url("http://img.webme.com/pic/p/procssdesign/bg-1.jpg"); */
-  
-}
-
 body .container {
   background-color: #848484;
   width: 40%;
   margin: auto; }
   body .container .pantalla {
-    margin: inherit; }
+    margin: inherit;
+    background-color: white; }
   body .container .teclas table tr {
     height: 30px; }
     body .container .teclas table tr td {
