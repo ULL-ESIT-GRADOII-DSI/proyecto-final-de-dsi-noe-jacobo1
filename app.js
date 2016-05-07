@@ -15,16 +15,18 @@ app.use(express.static(__dirname + '/public'));
 
 //calculate o hace falta llamarlo con el .js .
 //const calculate = require('./models/calculate.js');
-const calculate= require('./models/calc.js');
+//const calculate= require('./models/calc.js');
+const calculate = require('./models/conversion.js');
 
 app.get('/', (request, response) => {
   response.render('index',
   {title : 'Calculadora myApp', error:"" })
 });
 
-// app.get('/csv', (request, response) => {
-//     response.send({ "rows": calculate(request.query.input) });
-// });
+app.get('/calc', (request, response) => {
+  console.log("muestra en midel-> "+request.query.input);
+    response.send({ "original": calculate(request.query.input) });
+});
 
 app.listen(app.get('port'), () => {
     console.log(`Node app is running at localhost: ${app.get('port')}` );

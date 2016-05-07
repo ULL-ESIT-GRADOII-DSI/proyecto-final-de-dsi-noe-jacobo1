@@ -4,10 +4,10 @@
 
 
 // /* Volcar la tabla con el resultado en el HTML */
-//     const fillTable = (data) => {
-//     console.log("dato d filltable"+ resultTemplate);
-//     $("#finaltable").html(_.template(resultTemplate, { rows: data.rows }));
-// };
+    const datos = (data) => {
+    console.log("dato d datos "+ data);
+    //$("#finaltable").html(_.template(resultTemplate, { rows: data.rows }));
+};
 
 // /* Volcar en la textarea de entrada
 //  * #original el contenido del fichero fileName */
@@ -58,25 +58,22 @@ $(document).ready(() => {
     let original = document.getElementById("original");
     if (window.localStorage && localStorage.original) {
       original.value = localStorage.original;
-      console.log("LocalStorage" + original.value);
+      console.log("LocalStorage -> " + original.value);
     }
     
     $("#igual").click( () => {
         if (window.localStorage) localStorage.original = original.value;
-        console.log("#valor text area"+original.value);
-        console.log("LLegamos al click igual")
+        console.log("#valor text area LocalStorage -> "+original.value);
+        console.log("LLegamos al click igual");
+         $.get("/calc", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
+          { input: original.value },
+          datos,
+          'json'
+        );
         
        
     });
-     $('button.example').each( (_,y) => {
-     $(y).click( () => { 
-         console.log("#0".value);
-         
-         var boton =document.getElementById("#0").innerHTML;
-         console.log(boton);
-         console.log("Pinchamos en los botones numericos");
-     });
-     });
+    
     
     
 //     //cargamos ejemplos input.txt
@@ -105,29 +102,6 @@ $(document).ready(() => {
 //     let inputFile = $('.inputfile')[0];
 //     inputFile.addEventListener('change', handleFileSelect, false);
 
-window.onload = function(){ //Acciones tras cargar la página
- var screen =document.getElementById("original").innerHTML; //elemento pantalla de salida
- console.log(":::"+screen);
-}
 
-// flags para el tratamiento de la inserción
-var num_screen = "0";//cadena para poder concatenar posteriormente
-var flag_num = 1; //valor a 1-> iniciamos numero, 0-> no
-var flag_coma = 0;  //lo utilizaremos para impedir varias comas en un mismo num
-
-
-function numero(digito) {  //recoge el número pulsado en el argumento.
-console.log("->"+digito);
-         if ( num_screen =="0" || flag_num == 1  ) {  // inicializar un número, 
-            screen.innerHTML = digito; //mostrar en pantalla
-            console.log("---->"+screen.innerHTML);
-            num_screen = digito; //guardar número;
-            }
-         else { //si ya hay numero, continuarlo
-            screen.innerHTML += digito; //añadimos y mostramos en pantalla.
-            num_screen += digito; //añadimos y guardamos
-            }
-         flag_num = 0; //el número está iniciado y podemos ampliarlo.
-         }
  });
 })();
