@@ -1,29 +1,29 @@
-(function(exports){
-  "use strict";//utiliza el modo estricto donde no se puede utilizar variables no declaradas
+// (function(exports){
+//   "use strict";//utiliza el modo estricto donde no se puede utilizar variables no declaradas
 
 
 
 
-/********** SUMA **********/
+// /********** SUMA **********/
 
-function Suma(operando1,operando2){
+// function Suma(simbolo,operando2){
     
-  console.log("dentro de constrcutor celsius"+ "operando1:"+operando1+"operando2"+operando2);
-  Conversion.call(this,operando1,"+");
-}
-Suma.prototype = new Conversion();//heredamos de temp
-Suma.prototype.constructor = Suma;
-//Medida.measures.c = Celsius;
+//   console.log("dentro de constrcutor celsius"+ "simbolo:"+simbolo+"operando2"+operando2);
+//   Conversion.call(this,simbolo,operando2);
+// }
+// Suma.prototype = new Conversion;//heredamos de temp
+// Suma.prototype.constructor = Suma;
+// Conversion.measures.Suma = Suma;
 
-// Suma.prototype.+ = function(){
+// Suma.prototype.Suma = function(){
 //   return ((this.value * 9/5) + 32);
 // };
 
-/*************************/
+// /*************************/
 
 
 
 
-exports.Suma=Suma;
+// exports.Suma=Suma;
 
-})(this);
+// })(this);
