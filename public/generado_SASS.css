@@ -2,19 +2,18 @@ body .container {
   background-color: #848484;
   width: 40%;
   margin: auto; }
-  body .container .pantalla {
-    margin: inherit;
-    background-color: white; }
-  body .container .teclas table tr {
-    height: 30px; }
-    body .container .teclas table tr td {
-      width: 7%; }
-      body .container .teclas table tr td button {
-        width: 100%;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px; }
-        body .container .teclas table tr td button .tipo_numeros #imaginarios {
-          color: green; }
+  body .container .teclas {
+    padding: 10px; }
+    body .container .teclas table tr {
+      height: 30px; }
+      body .container .teclas table tr td {
+        width: 7%; }
+        body .container .teclas table tr td input {
+          width: 100%;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          border-radius: 4px; }
+          body .container .teclas table tr td input .tipo_numeros #imaginarios {
+            color: green; }
 
 /*# sourceMappingURL=generado_SASS.css.map */

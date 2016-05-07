@@ -3,7 +3,7 @@
 "use strict";
 
  window.onload = function(){ //Acciones tras cargar la página
- screen =document.getElementById("screen").innerHTML; //elemento pantalla de salida
+ screen =document.getElementById("screen"); //elemento pantalla de salida
  console.log(":::"+screen);
  }
 
@@ -17,6 +17,10 @@
 const numero = (digito) => {  //recoge el número pulsado en el argumento.
     
     console.log("->"+digito);
+         if (digito = "AC"){
+             screen.innerHTML = "0";
+             num_screen = "0";
+         }else
          if ( num_screen =="0" || flag_num == 1  ) {  // inicializar un número, 
             screen.innerHTML = digito; //mostrar en pantalla
             console.log("---->"+screen.innerHTML);
@@ -27,6 +31,7 @@ const numero = (digito) => {  //recoge el número pulsado en el argumento.
             num_screen += digito; //añadimos y guardamos
             }
          flag_num = 0; //el número está iniciado y podemos ampliarlo.
+         console.log("Chivato final numero en pantalla: "+num_screen);
 };
 
 
