@@ -55,7 +55,7 @@
 // }
 
 $(document).ready(() => {
-    let original = document.getElementById("screen");
+    let original = document.getElementById("numero");
     if (window.localStorage && localStorage.original) {
       original.value = localStorage.original;
       console.log("Pillamos el valor" + original.value);
