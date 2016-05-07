@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/noe-jacoboDSI/Calculadora/issues"
   },
-  "homepage": "https://github.com/noe-jacoboDSI/Calculadora#readme"
+  "homepage": "https://github.com/noe-jacoboDSI/Calculadora#readme",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
 }
