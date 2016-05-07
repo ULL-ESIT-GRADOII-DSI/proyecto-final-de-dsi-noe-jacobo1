@@ -17,21 +17,46 @@
 const numero = (digito) => {  //recoge el número pulsado en el argumento.
     
     console.log("->"+digito);
-         if (digito = "AC"){
+    ////////////////
+         if (digito == "AC"){
              screen.innerHTML = "0";
              num_screen = "0";
-         }else
+         }else{
+             
+         
+         if(digito == "+" || digito == "-" || digito == "/" || digito == "*")
+         flag_coma = 0;
+         
          if ( num_screen =="0" || flag_num == 1  ) {  // inicializar un número, 
             screen.innerHTML = digito; //mostrar en pantalla
             console.log("---->"+screen.innerHTML);
             num_screen = digito; //guardar número;
+            if(digito ==","){
+                screen.innerHTML = "0,";
+                num_screen = digito;
+                flag_coma = 1; 
+                console.log("ingresando coma con 0");
             }
+        }
          else { //si ya hay numero, continuarlo
-            screen.innerHTML += digito; //añadimos y mostramos en pantalla.
-            num_screen += digito; //añadimos y guardamos
+            if(digito == "," && flag_coma==0){
+                screen.innerHTML += digito;
+                num_screen+=digito;
+                flag_coma = 1;
+                console.log("ingresando coma sin 0 y coma=0");
             }
-         flag_num = 0; //el número está iniciado y podemos ampliarlo.
-         console.log("Chivato final numero en pantalla: "+num_screen);
+            else if (digito == "," && flag_coma == 1) {}
+            else{
+                screen.innerHTML += digito;
+                num_screen += digito;
+                console.log("ingresando coma sin 0 y coma=1");
+                
+            }
+        }
+        flag_num = 0; //el número está iniciado y podemos ampliarlo.
+        console.log("Chivato final numero en pantalla: "+num_screen);
+    }
+             
 };
 
 

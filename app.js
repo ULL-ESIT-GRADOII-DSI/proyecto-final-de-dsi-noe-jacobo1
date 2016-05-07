@@ -25,7 +25,7 @@ app.get('/', (request, response) => {
 
 app.get('/conv', (request, response) => {
   console.log("muestra en midel-> "+request.query.input);
-    response.send({ "original": calculate(request.query.input) });
+    response.send({ "screen": calculate(request.query.input) });
 });
 
 app.listen(app.get('port'), () => {

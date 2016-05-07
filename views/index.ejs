@@ -2,27 +2,23 @@
     <h4> Calculadora</h4>
     <font color="blue"><%=title%></font>
    <form action="#" name="calculadora" id="calculadora">
-    <!--div class="pantalla"-->
-        <p id="screen">0</p>
-        
-        
-        <tr>
-          <th>
-            <textarea class = "drop_zone" autofocus="" cols = "40" rows = "5" id="original"></textarea>
-          </th>
-        </tr>
-        
-    <!--/div-->
-   <!-- <div class="teclas">
+    
+    <div class="pantalla">
+       
+       <textarea class = "drop_zone" autofocus="" cols = "74" rows = "5" id="screen">0</textarea>
+    
+    </div>
+    
+   <div class="teclas">
    
-   
+   <form>
       <table>
   
         <tr>
           
-          <td><input  class ="tipo_numeros" type="button" id="imaginarios" value="i" /></td>
-          <td><input class ="tipo_numeros" type="button" id="reales" value="R" /></td>
-          <td><input class ="tipo_numeros" type="button" id="radianes" value="rad" /></td>
+          <td><input  class ="tipo_numeros" type="button" id="imaginarios" value="i"  onclick="numero('I')" /></td>
+          <td><input class ="tipo_numeros" type="button" id="reales" value="R" onclick="numero('R')" /></td>
+          <td><input class ="tipo_numeros" type="button" id="radianes" value="rad" onclick="numero('RAD')" /></td>
           
           
         </tr>
@@ -30,32 +26,33 @@
           <td><input class ="numeros" type="button" id="num_7" value="7" onclick="numero(7)" /></td>
           <td><input class ="numeros" type="button" id="num_8" value="8" onclick="numero(8)" /></td>
           <td><input class ="numeros" type="button" id="num_9" value="9" onclick="numero(9)" /></td>
-          <td><input class ="simbolos" type="button" id="AC" value="AC" /></td>
-          <td><input class ="simbolos" type="button" id="DEL" value="DEL" /></td>
+          <td><input class ="simbolos" type="button" id="AC" value="AC" onclick="numero('AC')" /></td>
+          <td><input class ="simbolos" type="button" id="DEL" value="DEL" onclick="numero('DEL')" /></td>
         </tr>
         <tr>
           <td><input class ="numeros" type="button" id="num_4" value="4" onclick="numero(4)" /></td>
           <td><input class ="numeros" type="button" id="num_5" value="5" onclick="numero(5)" /></td>
           <td><input class ="numeros" type="button" id="num_6" value="6" onclick="numero(6)" /></td>
-          <td><input class ="simbolos" type="button" id="multiplicacion" value="x"></td>
-          <td><input class ="simbolos" type="button" id="division" value="/"></td>
+          <td><input class ="simbolos" type="button" id="multiplicacion" value="x" onclick="numero('*')" ></td>
+          <td><input class ="simbolos" type="button" id="division" value="/" onclick="numero('/')" ></td>
         </tr>
         <tr>
           <td><input class ="numeros" type="button" id="num_1" value="1" onclick="numero(1)" /></td>
           <td><input class ="numeros" type="button" id="num_2" value="2" onclick="numero(2)" /></td>
           <td><input class ="numeros" type="button" id="num_3" value="3" onclick="numero(3)" /></td>
-          <td><input class ="simbolos" type="button" id="mas" value="+"></td>
-          <td><input class ="simbolos" type="button" id="menos" value="-"></td>
+          <td><input class ="simbolos" type="button" id="mas" value="+" onclick="numero('+')" ></td>
+          <td><input class ="simbolos" type="button" id="menos" value="-" onclick="numero('-')" ></td>
         </tr>
         <tr>
           <td><input class ="numeros" type="button" id="num_0" value="0" onclick="numero(0)" /></td>
-          <td><input class ="simbolos" type="button" id="mas_menos" value="+/-"></td>
-          <td><input class ="simbolos" type="button" id="punto" value="."></td>
-          <td><input class ="numeros" type="button" id="num_1" value="..."></td>
-          <td><input class ="simbolos" type="button" id="igual" value="="></td>
+          <td><input class ="simbolos" type="button" id="mas_menos" value="+/-" onclick="numero('+/-')"></td>
+          <td><input class ="simbolos" type="button" id="punto" value="," onclick="numero(',')" ></td>
+          <td><input class ="numeros" type="button" id="num_1" value="..." onclick="numero('...')" ></td>
+          <td><input class ="simbolos" type="button" id="igual" value="=" ></td>
         </tr>
       </table>
-    </div>-->
+      </form>
+    </div><!--
     <div></div>
         <p>
           <input type="button"  value="0" onclick='numero(0)' />
@@ -74,6 +71,6 @@
           <input type="button"  value="/" onclick="numero('/')" />
           <input type="button"  value="=" id="igual">
         </p>
-
-    </form>
+-->
+    <!--</form>-->
   </div>
