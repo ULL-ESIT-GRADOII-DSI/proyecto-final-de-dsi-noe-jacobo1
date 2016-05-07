@@ -66,9 +66,7 @@ $(document).ready(() => {
         console.log("#valor text area LocalStorage -> "+original.value);
         console.log("LLegamos al click igual");
          $.get("/calc", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
-          { input: original.value },
-          datos,
-          'json'
+          { input: original.value }
         );
         
        

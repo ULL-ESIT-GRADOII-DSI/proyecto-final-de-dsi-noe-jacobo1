@@ -3,7 +3,7 @@
 
 const conversion = (entrada) => {  //recoge el número pulsado en el argumento.
     
-    console.log("Mostramos la entrada en conversion"+entrada);
+    console.log("Mostramos la entrada en conversion "+entrada);
     
          };
 
