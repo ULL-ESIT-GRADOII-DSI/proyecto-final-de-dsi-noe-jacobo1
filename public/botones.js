@@ -55,17 +55,28 @@
 // }
 
 $(document).ready(() => {
-    let original = document.getElementById("numero");
+    let original = document.getElementById("original");
     if (window.localStorage && localStorage.original) {
       original.value = localStorage.original;
-      console.log("Pillamos el valor" + original.value);
+      console.log("LocalStorage" + original.value);
     }
     
     $("#igual").click( () => {
         if (window.localStorage) localStorage.original = original.value;
+        console.log("#valor text area"+original.value);
         console.log("LLegamos al click igual")
+        
        
     });
+     $('button.example').each( (_,y) => {
+     $(y).click( () => { 
+         console.log("#0".value);
+         
+         var boton =document.getElementById("#0").innerHTML;
+         console.log(boton);
+         console.log("Pinchamos en los botones numericos");
+     });
+     });
     
     
 //     //cargamos ejemplos input.txt
@@ -83,58 +94,7 @@ $(document).ready(() => {
 //           'json'
 //         );
 //     });
-   
- 
-        
-//      //boton de guardar nueva entrada   
-//      $("#Guardar").click(() => {
-//         if (window.localStorage) localStorage.original = original.value;
-        
-//                     //textbox a rellenar
-//                     $("#div_oculto").css("display", "block");
-        
-//                     $("#Boton_enviar").click( () => {
-//                         console.log(DB.value);
-//                         console.log(original.value);
-//                     //ocultamos textbox
-//                     $("#div_oculto").css("display", "none");
-        
-//             $.get("/entrada", {
-//                 name: $("#DB").val(),
-//                 content: $("#original").val()
-//             });
-          
-//             var non = $("#DB").val();
-//             var r= $('<button class="example" type="button" id="' + non +  '">'+ non + '</button>');
-//             $(".example").append(r); //se muestra la ultima entrada repetida arreglar
-        
-        
-//         $('button.example').each( (_,y) => {
-//         $(y).click( () => {                                     
-//             $.get("/findMongo",{name: $(y).text()},(data) => {
-//                 $("#original").val(data[0].content);///////////////////////////////////////////////////////////////////////////////////////
-//             });
-//         });
-//         });
-//         });
-//     });
-       
-        
-//          //mostramos botones almacenados en mongodb
-//     $.get("/showButtons", {}, (data) => {
-//             for (var i = 0; i < 4; i++) {
-//                 $('button.example').get(i).className = "examples";///////////////////////////////////7////////
-//             }
-//     });
 
-//         //buscariamos al clikar y devolveriamso el contenido de mongodb a la etiqueta original
-//     $('button.example').each( (_,y) => {
-//         $(y).click( () => {                         
-//             $.get("/findMongo",{name: $(y).text()},(data) => {
-//                         $("#original").val(data[0].content);////////////////////////////////////////////////////////
-//             });
-//         });
-//     });
    
 
 //     // Setup the drag and drop listeners.
@@ -144,5 +104,30 @@ $(document).ready(() => {
 //     dropZone.addEventListener('drop', handleDragFileSelect, false);
 //     let inputFile = $('.inputfile')[0];
 //     inputFile.addEventListener('change', handleFileSelect, false);
+
+window.onload = function(){ //Acciones tras cargar la página
+ var screen =document.getElementById("original").innerHTML; //elemento pantalla de salida
+ console.log(":::"+screen);
+}
+
+// flags para el tratamiento de la inserción
+var num_screen = "0";//cadena para poder concatenar posteriormente
+var flag_num = 1; //valor a 1-> iniciamos numero, 0-> no
+var flag_coma = 0;  //lo utilizaremos para impedir varias comas en un mismo num
+
+
+function numero(digito) {  //recoge el número pulsado en el argumento.
+console.log("->"+digito);
+         if ( num_screen =="0" || flag_num == 1  ) {  // inicializar un número, 
+            screen.innerHTML = digito; //mostrar en pantalla
+            console.log("---->"+screen.innerHTML);
+            num_screen = digito; //guardar número;
+            }
+         else { //si ya hay numero, continuarlo
+            screen.innerHTML += digito; //añadimos y mostramos en pantalla.
+            num_screen += digito; //añadimos y guardamos
+            }
+         flag_num = 0; //el número está iniciado y podemos ampliarlo.
+         }
  });
 })();

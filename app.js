@@ -15,6 +15,7 @@ app.use(express.static(__dirname + '/public'));
 
 //calculate o hace falta llamarlo con el .js .
 //const calculate = require('./models/calculate.js');
+const calculate= require('./models/calc.js');
 
 app.get('/', (request, response) => {
   response.render('index',
