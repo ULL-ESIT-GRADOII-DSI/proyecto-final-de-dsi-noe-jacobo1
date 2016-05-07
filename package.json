@@ -26,6 +26,8 @@
   },
   "devDependencies": {
     "mongoose": "^4.4.13",
-    "node": "0.0.0"
+    "node": "0.0.0",
+    "regexp": "^1.0.0",
+    "xregexp": "^3.1.0"
   }
 }
