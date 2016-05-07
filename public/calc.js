@@ -21,6 +21,7 @@ const numero = (digito) => {  //recoge el número pulsado en el argumento.
          if (digito == "AC"){
              screen.innerHTML = "0";
              num_screen = "0";
+             flag_coma = 0;
          }else{
              
          

@@ -1,31 +1,29 @@
-(() => {
-"use strict";
-// Comprobar el correcto funcionamiento de XRegExp
+(function(exports){
+  "use strict";//utiliza el modo estricto donde no se puede utilizar variables no declaradas
 
 
 
-const conversion = (entrada) => {  //recoge el número pulsado en el argumento.
 
- var XRegExp = require('xregexp');
- var patron = XRegExp( '(?<op1> [+-]?[0-9]+)(,?[+-]?[0-9]+)? #op1 (?<operracion> [+-*/]) #operacion','x');
+/********** SUMA **********/
 
-
-// ?<operando_a> [+-]?[0-9]+(,[+-]?[0-9])?)\n'+
-//                         '(?<op> [+-*/])\n'+
-//                         '(?<operando_b> [+-]?[0-9]+(,[+-]?[0-9])?)', 'x'
-
+function Suma(operando1,operando2){
     
-var mch = XRegExp.exec(entrada, patron);
-if(mch)
-console.log("La expresión casó.");
-else 
-    console.log("Fracaso");
-    
-    //console.log("Mostramos la entrada en conversion "+entrada);
-    
+  console.log("dentro de constrcutor celsius"+ "operando1:"+operando1+"operando2"+operando2);
+  Conversion.call(this,operando1,"+");
+}
+Suma.prototype = new Conversion();//heredamos de temp
+Suma.prototype.constructor = Suma;
+//Medida.measures.c = Celsius;
 
-    
-};
+// Suma.prototype.+ = function(){
+//   return ((this.value * 9/5) + 32);
+// };
 
- module.exports = conversion;
-})();
+/*************************/
+
+
+
+
+exports.Suma=Suma;
+
+})(this);

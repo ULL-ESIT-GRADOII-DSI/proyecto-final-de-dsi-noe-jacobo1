@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public'));
 //calculate o hace falta llamarlo con el .js .
 //const calculate = require('./models/calculate.js');
 //const calculate= require('./models/calc.js');
-const calculate = require('./models/operaciones.js');
+const calculate = require('./models/principal.js');
 
 app.get('/', (request, response) => {
   response.render('index',
@@ -25,7 +25,7 @@ app.get('/', (request, response) => {
 
 app.get('/conv', (request, response) => {
   console.log("muestra en midel-> "+request.query.input);
-    response.send({ "screenscreen": calculate(request.query.input) });
+    response.send({ "screen": calculate(request.query.input) });
 });
 
 app.listen(app.get('port'), () => {
