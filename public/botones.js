@@ -56,15 +56,13 @@
 
 $(document).ready(() => {
     let original = document.getElementById("screen");
-    // if (window.localStorage && localStorage.original) {
-    //   original.value = localStorage.original;
-    //   console.log("LocalStorage -> " + original.value);
-    // }
+   
+    //console.log("\n\n Mostrando original: "+original+"\n\n");
     
     $("#igual").click( () => {
        // if (window.localStorage) localStorage.original = original.value;
        // console.log("#valor text area LocalStorage -> "+original.value);
-        console.log("LLegamos al click igual");
+        console.log("\n\n Mostrando original: "+original.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
           { input: original.value },
           //datos,

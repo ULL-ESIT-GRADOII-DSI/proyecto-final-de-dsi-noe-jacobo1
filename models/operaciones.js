@@ -1,29 +1,44 @@
-// (function(exports){
-//   "use strict";//utiliza el modo estricto donde no se puede utilizar variables no declaradas
+(function(exports){
+  "use strict";//utiliza el modo estricto donde no se puede utilizar variables no declaradas
 
-
-
-
-// /********** SUMA **********/
-
-// function Suma(simbolo,operando2){
+/////////////////////SUMA/////////////////////////
+function Suma(operando1,operando2){
     
-//   console.log("dentro de constrcutor celsius"+ "simbolo:"+simbolo+"operando2"+operando2);
-//   Conversion.call(this,simbolo,operando2);
-// }
-// Suma.prototype = new Conversion;//heredamos de temp
-// Suma.prototype.constructor = Suma;
-// Conversion.measures.Suma = Suma;
-
-// Suma.prototype.Suma = function(){
-//   return ((this.value * 9/5) + 32);
-// };
-
-// /*************************/
+console.log("dentro de constrcutor suma"+ "simbolo:"+operando1+"operando2"+operando2);
+Operandos.call(this,operando1,operando2);
+}
 
 
+Suma.prototype = new Operandos();
+Suma.prototype.constructor = Suma;
+Operandos.measures.s = Suma;
+
+Suma.prototype.resultado_operacion = function(){
+   var op1 = parseInt(this.operando1);
+   var op2 = parseInt(this.operando2);
+return (op1 + op2);
+};
+//////////////////////////////////
+
+////////// Resta ////////////
+function Resta(operando1, operando2)
+{
+    Operandos.call(this, operando1, operando2);
+}
+
+Resta.prototype = new Operandos();
+Resta.prototype.constructor = Resta;
+Operandos.measures.r = Resta;
+
+Resta.prototype.resultado_operacion = function(){
+   var op1 = parseInt(this.operando1);
+    var    op2 = parseInt(this.operando2);
+return (op1 - op2);
+};
 
 
-// exports.Suma=Suma;
 
-// })(this);
+exports.Suma=Suma;
+exports.Resta=Resta;
+
+})(this);
