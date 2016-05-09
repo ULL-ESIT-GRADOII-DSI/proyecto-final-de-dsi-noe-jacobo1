@@ -65,7 +65,7 @@ $(document).ready(() => {
         console.log("\n\n Mostrando original: "+original.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
           { input: original.value },
-          //datos,
+           //calculate(input),
           'json'
         );
         
