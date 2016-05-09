@@ -12,15 +12,6 @@ var patron = XRegExp( '(?<operando1> [+-]?[0-9]+(,?[+-]?[0-9]+)?) #operando1  \n
 
 
 
-
-
-
-
-
-
-
-
-
 /**/
 //Clase operandos
 function Operandos(operando1,operando2){
@@ -34,11 +25,22 @@ function Operandos(operando1,operando2){
 
 Operandos.constructor = Operandos;
 Operandos.measures = Operandos.measures || {};
-/**/
+
+Operandos.match = function(entrada){
+var expre=XRegExp.exec(entrada, patron);
+//console.log("Hecho el match->"+expre);
+return expre;
+}
+
+// Operandos.measures.s = Suma;
+// Operandos.measures.r = Resta;
+// Operandos.measures.m = Multiplicacion;
+// //Operandos.measures.d = Division;
+
 /////////////////////SUMA/////////////////////////
 function Suma(operando1,operando2){
     
-console.log("dentro de constrcutor suma"+ "simbolo:"+operando1+"operando2"+operando2);
+//console.log("dentro de constrcutor suma"+ "simbolo:"+operando1+"operando2"+operando2);
 Operandos.call(this,operando1,operando2);
 }
 
@@ -49,12 +51,13 @@ Operandos.measures.s = Suma;
 
 Suma.prototype.resultado_operacion = function(){
    var op1 = parseInt(this.operando1);
-    var    op2 = parseInt(this.operando2);
+   var op2 = parseInt(this.operando2);
 return (op1 + op2);
 };
-//////////////////////////////////
+//__________________________________________________
 
-////////// Resta ////////////
+
+////////////////// Resta /////////////////
 function Resta(operando1, operando2)
 {
     Operandos.call(this, operando1, operando2);
@@ -69,21 +72,36 @@ Resta.prototype.resultado_operacion = function(){
     var    op2 = parseInt(this.operando2);
 return (op1 - op2);
 };
+//__________________________________________________
 
 
-/***/
-
-Operandos.match = function(entrada){
-var expre=XRegExp.exec(entrada, patron);
-console.log("Hecho el match->"+expre);
-return expre;
+////////////////// Resta /////////////////
+function Multiplicacion(operando1, operando2)
+{
+    Operandos.call(this, operando1, operando2);
 }
+
+Multiplicacion.prototype = new Operandos();
+Multiplicacion.prototype.constructor = Multiplicacion;
+Operandos.measures.m = Multiplicacion;
+
+Multiplicacion.prototype.resultado_operacion = function(){
+   var op1 = parseInt(this.operando1);
+    var    op2 = parseInt(this.operando2);
+return (op1 * op2);
+};
+//__________________________________________________
+
+
+
 
 
 const Conversion = (entrada) => {  //recoge el número pulsado en el argumento.
 
 var measures = Operandos.measures;
 var match = Operandos.match(entrada);
+
+
 
 console.log("Measures creado"+measures);
 
@@ -94,6 +112,9 @@ function traduccion(simbolo_entrada)
     return "s";
     if(simbolo_entrada == "-")
     return "r";
+    if(simbolo_entrada == "*")
+    return "m";
+
 };
 /**********************/
 
@@ -119,8 +140,6 @@ if(match){
 
     
 };
- exports.Suma = Suma;
  module.exports = Conversion;
- //module.exports = Suma;
  
 })(this);
