@@ -5,7 +5,7 @@
 
 // /* Volcar la tabla con el resultado en el HTML */
     const datos = (data) => {
-    console.log("dato d datos "+ data);
+    console.log("dato de datos "+ data);
     //$("#finaltable").html(_.template(resultTemplate, { rows: data.rows }));
 };
 

@@ -1,22 +1,21 @@
-(function(exports){
+((){
   "use strict";//utiliza el modo estricto donde no se puede utilizar variables no declaradas
+//var Operandos = require("./principal.js");
 
 
 /////////////////////SUMA/////////////////////////
-function Suma(operando1,operando2){
-    
+function Suma(operando1,operando2)
+{
 //console.log("dentro de constrcutor suma"+ "simbolo:"+operando1+"operando2"+operando2);
-Operandos.call(this,operando1,operando2);
+Operando.call(this,operando1,operando2);
 }
 
 
 Suma.prototype = new Operandos();
 Suma.prototype.constructor = Suma;
-//Operandos.measures.s = Suma;
+Operandos.measures.s = Suma;
 
 Suma.prototype.resultado_operacion = function(){
-   var op1 = parseInt(this.operando1);
-   var op2 = parseInt(this.operando2);
 return (op1 + op2);
 };
 //__________________________________________________
@@ -33,14 +32,12 @@ Resta.prototype.constructor = Resta;
 //Operandos.measures.r = Resta;
 
 Resta.prototype.resultado_operacion = function(){
-   var op1 = parseInt(this.operando1);
-    var    op2 = parseInt(this.operando2);
 return (op1 - op2);
 };
 //__________________________________________________
 
 
-////////////////// Resta /////////////////
+////////////////// Multiplicacion /////////////////
 function Multiplicacion(operando1, operando2)
 {
     Operandos.call(this, operando1, operando2);
@@ -51,16 +48,27 @@ Multiplicacion.prototype.constructor = Multiplicacion;
 //Operandos.measures.m = Multiplicacion;
 
 Multiplicacion.prototype.resultado_operacion = function(){
-   var op1 = parseInt(this.operando1);
-    var    op2 = parseInt(this.operando2);
 return (op1 * op2);
 };
 //__________________________________________________
 
 
+////////////////// Division /////////////////
+function Division(operando1, operando2)
+{
+    Operandos.call(this, operando1, operando2);
+}
 
-exports.Suma=Suma;
-exports.Resta=Resta;
-exports.Multiplicacion=Multiplicacion;
+Division.prototype = new Operandos();
+Division.prototype.constructor = Division;
+Operandos.measures.d = Division;
 
-})(this);
+Division.prototype.resultado_operacion = function(){
+return (op1 / op2);
+};
+//__________________________________________________
+
+ module.exports = { Suma:Suma, Resta:Resta, Multiplicacion:Multiplicacion, Division:Division, Operandos:Operandos };
+
+
+})();

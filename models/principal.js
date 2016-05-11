@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 // Comprobar el correcto funcionamiento de XRegExp
-
+//var Operaciones = require("./operaciones.js");
 var XRegExp = require('xregexp');
 //var patron = XRegExp( '(?<operando1> [+-]?[0-9]+)(,?[+-]?[0-9]+)? #operando1 (?<operacion> [+|-|*|/])? #operacion (?<operando2> [+-]?[0-9]+)(,?[+-]?[0-9]+)? #operando2','ix');
 
@@ -14,83 +14,27 @@ var patron = XRegExp( '(?<operando1> [+-]?[0-9]+(,?[+-]?[0-9]+)?) #operando1  \n
 
 /**/
 //Clase operandos
-function Operandos(operando1,operando2){
- //console.log("OP1 y OP2"+operando1 + operando2);
- 
- this.operando1=operando1;
- this.operando2=operando2;
- console.log("\noperando1 en la clase operandos :"+operando1+ " en la clase operandos operando_2  "+operando2);
+function Operandos(operando1,operando2)
+{
+ this.operando1=operando1 ;
+ this.operando2=operando2 ;
 }
 
 
 Operandos.constructor = Operandos;
 Operandos.measures = Operandos.measures || {};
 
-Operandos.match = function(entrada){
+Operandos.match = function(entrada)
+{
 var expre=XRegExp.exec(entrada, patron);
-//console.log("Hecho el match->"+expre);
 return expre;
 }
 
-// Operandos.measures.s = Suma;
-// Operandos.measures.r = Resta;
-// Operandos.measures.m = Multiplicacion;
-// //Operandos.measures.d = Division;
+//  Operandos.measures.s = Suma;
+//  Operandos.measures.r = Resta;
+//  Operandos.measures.m = Multiplicacion;
+//  Operandos.measures.d = Division;
 
-/////////////////////SUMA/////////////////////////
-function Suma(operando1,operando2){
-    
-//console.log("dentro de constrcutor suma"+ "simbolo:"+operando1+"operando2"+operando2);
-Operandos.call(this,operando1,operando2);
-}
-
-
-Suma.prototype = new Operandos();
-Suma.prototype.constructor = Suma;
-Operandos.measures.s = Suma;
-
-Suma.prototype.resultado_operacion = function(){
-   var op1 = parseInt(this.operando1);
-   var op2 = parseInt(this.operando2);
-return (op1 + op2);
-};
-//__________________________________________________
-
-
-////////////////// Resta /////////////////
-function Resta(operando1, operando2)
-{
-    Operandos.call(this, operando1, operando2);
-}
-
-Resta.prototype = new Operandos();
-Resta.prototype.constructor = Resta;
-Operandos.measures.r = Resta;
-
-Resta.prototype.resultado_operacion = function(){
-   var op1 = parseInt(this.operando1);
-    var    op2 = parseInt(this.operando2);
-return (op1 - op2);
-};
-//__________________________________________________
-
-
-////////////////// Resta /////////////////
-function Multiplicacion(operando1, operando2)
-{
-    Operandos.call(this, operando1, operando2);
-}
-
-Multiplicacion.prototype = new Operandos();
-Multiplicacion.prototype.constructor = Multiplicacion;
-Operandos.measures.m = Multiplicacion;
-
-Multiplicacion.prototype.resultado_operacion = function(){
-   var op1 = parseInt(this.operando1);
-    var    op2 = parseInt(this.operando2);
-return (op1 * op2);
-};
-//__________________________________________________
 
 
 
@@ -114,6 +58,8 @@ function traduccion(simbolo_entrada)
     return "r";
     if(simbolo_entrada == "*")
     return "m";
+    if(simbolo_entrada == "/")
+    return "d";
 
 };
 /**********************/
@@ -121,11 +67,11 @@ function traduccion(simbolo_entrada)
 
 if(match){
  console.log("La expresión casó y estamos dentro del match.");
- var operando1 = match.operando1;
- var operando2 = match.operando2;
+ var operando1 = parseInt(match.operando1);
+ var operando2 = parseInt(match.operando2);
  //var simbolo = match.operacion;
  var simbolo = traduccion(match.operacion);
- console.log("\nContenido de símbolo -------> "+simbolo);
+ console.log("\n--------------------->Contenido de símbolo -------> "+simbolo);
  console.log("operando1 :"+operando1+"  op  "+simbolo+ "  operando_2  "+operando2); //aquí llegan bien los datos.
  
  var source = new measures[simbolo](operando1,operando2);
