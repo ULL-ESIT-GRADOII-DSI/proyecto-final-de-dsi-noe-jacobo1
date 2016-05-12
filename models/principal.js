@@ -30,12 +30,78 @@ var expre=XRegExp.exec(entrada, patron);
 return expre;
 }
 
-//  Operandos.measures.s = Suma;
-//  Operandos.measures.r = Resta;
-//  Operandos.measures.m = Multiplicacion;
-//  Operandos.measures.d = Division;
+ /*******************************************************************************
+ *                                                                              *    
+ *              CLASES PARA CADA UNA DE LAS OPERACIONES SOPORTADAS              *
+ *                                                                              *
+ * *****************************************************************************/
+
+/////////////////////SUMA/////////////////////////
+function Suma(operando1,operando2)
+{
+//console.log("dentro de constrcutor suma"+ "simbolo:"+operando1+"operando2"+operando2);
+Operandos.call(this,operando1,operando2);
+}
 
 
+Suma.prototype = new Operandos();
+Suma.prototype.constructor = Suma;
+Operandos.measures.s = Suma;
+
+Suma.prototype.resultado_operacion = function(){
+return (this.operando1 + this.operando2);
+};
+//__________________________________________________
+
+
+////////////////// Resta /////////////////
+function Resta(operando1, operando2)
+{
+    Operandos.call(this, operando1, operando2);
+}
+
+Resta.prototype = new Operandos();
+Resta.prototype.constructor = Resta;
+Operandos.measures.r = Resta;
+
+Resta.prototype.resultado_operacion = function(){
+return (this.operando1 - this.operando2);
+};
+//__________________________________________________
+
+
+////////////////// Multiplicacion /////////////////
+function Multiplicacion(operando1, operando2)
+{
+    Operandos.call(this, operando1, operando2);
+}
+
+Multiplicacion.prototype = new Operandos();
+Multiplicacion.prototype.constructor = Multiplicacion;
+Operandos.measures.m = Multiplicacion;
+
+Multiplicacion.prototype.resultado_operacion = function(){
+return (this.operando1 * this.operando2);
+};
+//__________________________________________________
+
+
+////////////////// Division /////////////////
+function Division(operando1, operando2)
+{
+    Operandos.call(this, operando1, operando2);
+}
+
+Division.prototype = new Operandos();
+Division.prototype.constructor = Division;
+Operandos.measures.d = Division;
+
+Division.prototype.resultado_operacion = function(){
+return (this.operando1 / this.operando2);
+};
+//__________________________________________________
+
+/*******************************************************************************/
 
 
 
@@ -66,25 +132,23 @@ function traduccion(simbolo_entrada)
 
 
 if(match){
- console.log("La expresión casó y estamos dentro del match.");
- var operando1 = parseInt(match.operando1);
- var operando2 = parseInt(match.operando2);
- //var simbolo = match.operacion;
- var simbolo = traduccion(match.operacion);
- console.log("\n--------------------->Contenido de símbolo -------> "+simbolo);
- console.log("operando1 :"+operando1+"  op  "+simbolo+ "  operando_2  "+operando2); //aquí llegan bien los datos.
- 
- var source = new measures[simbolo](operando1,operando2);
- var resultado = source.resultado_operacion();
- 
- console.log(">Resultado--->"+resultado);
-}else {
-    console.log("Fracaso");
-}
-    //console.log("Mostramos la entrada en conversion "+entrada);
-    
-
-    
+     console.log("La expresión casó y estamos dentro del match.");
+     var operando1 = parseInt(match.operando1);
+     var operando2 = parseInt(match.operando2);
+     //var simbolo = match.operacion;
+     var simbolo = traduccion(match.operacion);
+     console.log("\n\n----------------->>> measures.simbolo(op1,op2): "+measures[simbolo](operando1,operando2));
+     console.log("\n--------------------->Contenido de símbolo -------> "+simbolo);
+     //console.log("operando1 :"+operando1+"  op  "+simbolo+ "  operando_2  "+operando2); //aquí llegan bien los datos.
+     
+     var source = new measures[simbolo](operando1,operando2);
+     var resultado = source.resultado_operacion();
+     
+     console.log(">Resultado--->"+resultado);
+    }else {
+        console.log("Fracaso");
+    }
+        
 };
  module.exports = Conversion;
  
