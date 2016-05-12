@@ -5,7 +5,7 @@
 
 // /* Volcar la tabla con el resultado en el HTML */
     const datos = (data) => {
-    console.log("dato de datos "+ data);
+    //console.log("dato de datos "+ data);
     //$("#finaltable").html(_.template(resultTemplate, { rows: data.rows }));
 };
 
@@ -62,10 +62,10 @@ $(document).ready(() => {
     $("#igual").click( () => {
        // if (window.localStorage) localStorage.original = original.value;
        // console.log("#valor text area LocalStorage -> "+original.value);
-        console.log("\n\n Mostrando original: "+original.value+"\n\n");
+        //console.log("\n\n Mostrando original: "+original.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
           { input: original.value },
-           //calculate(input),
+           //(input),
           'json'
         );
         
