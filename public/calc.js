@@ -4,7 +4,7 @@
 
  window.onload = function(){ //Acciones tras cargar la página
  screen =document.getElementById("screen"); //elemento pantalla de salida
- console.log(":::"+screen);
+ //console.log(":::"+screen);
  }
 
 // // flags para el tratamiento de la inserción

@@ -2,6 +2,14 @@ body .container {
   background-color: #848484;
   width: 40%;
   margin: auto; }
+  body .container .registro {
+    margin-left: 4px; }
+    body .container .registro input {
+      margin-bottom: 4px;
+      margin-left: 30%; }
+  body .container .cambio_usuario {
+    margin-left: 4px;
+    display: none;}
   body .container .teclas {
     padding: 10px; }
     body .container .teclas table tr {

@@ -1,11 +1,26 @@
 <div class="container">
-    <h4> Calculadora</h4>
-    <font color="blue"><%=title%></font>
+    <!--<%=title%>-->
+    <!-- Comenzando nueva parte -->
+    <div class = "registro">
+      <h1>CalcOnLine</h1>
+      <p>Binevenido a la calculadora online.
+         Por favor, ingrese su nombre a continuación: </p>
+      <input class="nombre_usuario" type="text" autofocus id="nombre_usuario" name="nombre_usuario">
+      <button class ="guardar_nombre" type="button" id="boton_nombre" name="boton_nombre">Comenzar</button>
+    </div>
+    
+     <div class = "cambio_usuario" id="oculto">
+      <h1>CalcOnLine</h1>
+      <p> Acceso correcto. Comience a trabajar con CalcOnLine</p>
+      <button class ="cambiar_nombre" type="button" id="cambiar_nombre" name="cambiar_nombre">Cambio de usuario</button>
+    </div>
+    
+    <!-- Finalizando nueva parte -->
    <form action="#" name="calculadora" id="calculadora">
     
     <div class="pantalla">
        
-       <textarea class = "drop_zone" autofocus="" cols = "74" rows = "5" id="screen" name="screen">0</textarea>
+       <textarea class = "drop_zone" cols = "74" rows = "5" id="screen" name="screen">0</textarea>
     
     </div>
     

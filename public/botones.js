@@ -68,8 +68,40 @@ $(document).ready(() => {
            //(input),
           'json'
         );
-        
-       
+    });
+    
+    
+    /***************** IMPORTANTE *****************************/
+    // Para trabajar con la ocultacion de divs y eso
+    // necesitamos incluir de alguna manera las partes
+    // del html con las que trabajar.
+    // En el ejemplo de mongose se declara arriba lo siguiente 
+    
+    //     const resultTemplate = `
+    // <div class="contenido">
+    //       <table class="center" id="result">
+    //           <% _.each(rows, (row) => { %>
+    //           <tr class="<%=row.type%>">
+    //               <% _.each(row.items, (name) =>{ %>
+    //               <td><%= name %></td>
+    //               <% }); %>
+    //           </tr>
+    //           <% }); %>
+    //       </table>
+    //   </p>
+    // </div>
+    // `;
+    
+    // Creo que gracias a esto podemos trabajar con "contenido" en
+    // ese caso y con result. Pienso que igual necesitamos algo similar,
+    // sin tabla, sino que adecuado a nuestro html, pero no lo sé seguro.
+    
+    $('#boton_nombre').click(() => {
+     // Aquí deberemos guardar el nombre que está contenido 
+     // en el input con id y nombre = "nombre_usuario"
+     // Ocultamos el div de registro y mostramos el nuevo (cambio_usuario)
+     $("#registro").css("display","none");
+     $("#cambio_usuario").css("display","inline");
     });
     
     
