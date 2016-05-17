@@ -100,6 +100,8 @@ $(document).ready(() => {
      // Aquí deberemos guardar el nombre que está contenido 
      // en el input con id y nombre = "nombre_usuario"
      // Ocultamos el div de registro y mostramos el nuevo (cambio_usuario)
+     console.log("nombre de usuario"+ nombre_usuario.value);
+     
      $("#registro").css("display","none");
      $("#cambio_usuario").css("display","inline");
     });
