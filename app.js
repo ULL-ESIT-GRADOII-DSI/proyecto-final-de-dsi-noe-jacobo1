@@ -17,6 +17,7 @@ app.use(express.static(__dirname + '/public'));
 //const calculate = require('./models/calculate.js');
 //const calculate= require('./models/calc.js');
 const calculate = require('./models/principal.js');
+const mongodb = require('./models/dbmongo.js');
 
 app.get('/', (request, response) => {
   response.render('index',
