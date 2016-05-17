@@ -1,13 +1,45 @@
 (() => {
 "use strict"; // Use ECMAScript 5 strict mode in browsers that support it
 
-
+   
+    /***************** IMPORTANTE *****************************/
+    // Para trabajar con la ocultacion de divs y eso
+    // necesitamos incluir de alguna manera las partes
+    // del html con las que trabajar.
+    // En el ejemplo de mongose se declara arriba lo siguiente 
+    
+        const resultTemplate = `
+    <div class="pantalla">
+          <textarea class="drop_zone" id="result">
+              <% _.each(rows, (row) => { %>
+              <tr class="<%=row.type%>">
+                  <% _.each(row.items, (name) =>{ %>
+                  <td><%= name %></td>
+                  <% }); %>
+              </tr>
+              <% }); %>
+          </textarea>
+      </p>
+    </div>
+    `;
+    //<textarea class = "drop_zone" cols = "74" rows = "5" id="screen" name="screen">0</textarea>
+    
+    // Creo que gracias a esto podemos trabajar con "contenido" en
+    // ese caso y con result. Pienso que igual necesitamos algo similar,
+    // sin tabla, sino que adecuado a nuestro html, pero no lo sé seguro.
+    
 
 // /* Volcar la tabla con el resultado en el HTML */
-    const datos = (data) => {
-    //console.log("dato de datos "+ data);
-    //$("#finaltable").html(_.template(resultTemplate, { rows: data.rows }));
+    const Datos = (data) => {
+    console.log("dato de datos "+ data);
+    console.log("valor en funcion datos"+data.valor);
+    //screen.innerHTML = data.valor;
+    //$("#screen").html(_.template(resultTemplate, { rows: data.rows }));
+    $("#screen").html(data.valor);
 };
+
+
+
 
 // /* Volcar en la textarea de entrada
 //  * #original el contenido del fichero fileName */
@@ -55,7 +87,7 @@
 // }
 
 $(document).ready(() => {
-    let original = document.getElementById("screen");
+    let screen = document.getElementById("screen");
    
     //console.log("\n\n Mostrando original: "+original+"\n\n");
     
@@ -64,43 +96,18 @@ $(document).ready(() => {
        // console.log("#valor text area LocalStorage -> "+original.value);
         //console.log("\n\n Mostrando original: "+original.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
-          { input: original.value },
-           //(input),
+          { input: screen.value },
+           Datos,
           'json'
         );
     });
     
-    
-    /***************** IMPORTANTE *****************************/
-    // Para trabajar con la ocultacion de divs y eso
-    // necesitamos incluir de alguna manera las partes
-    // del html con las que trabajar.
-    // En el ejemplo de mongose se declara arriba lo siguiente 
-    
-    //     const resultTemplate = `
-    // <div class="contenido">
-    //       <table class="center" id="result">
-    //           <% _.each(rows, (row) => { %>
-    //           <tr class="<%=row.type%>">
-    //               <% _.each(row.items, (name) =>{ %>
-    //               <td><%= name %></td>
-    //               <% }); %>
-    //           </tr>
-    //           <% }); %>
-    //       </table>
-    //   </p>
-    // </div>
-    // `;
-    
-    // Creo que gracias a esto podemos trabajar con "contenido" en
-    // ese caso y con result. Pienso que igual necesitamos algo similar,
-    // sin tabla, sino que adecuado a nuestro html, pero no lo sé seguro.
-    
+ 
     $('#boton_nombre').click(() => {
      // Aquí deberemos guardar el nombre que está contenido 
      // en el input con id y nombre = "nombre_usuario"
      // Ocultamos el div de registro y mostramos el nuevo (cambio_usuario)
-     console.log("nombre de usuario"+ nombre_usuario.value);
+     console.log("nombre de usuario: "+ nombre_usuario.value);
      
      $("#registro").css("display","none");
      $("#cambio_usuario").css("display","inline");
