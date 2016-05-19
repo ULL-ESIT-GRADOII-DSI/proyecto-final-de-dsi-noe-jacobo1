@@ -52,42 +52,42 @@ const dump = (fileName) => {
   });
 };
 
-// //ficheros
-// const handleFileSelect = (evt) => {
-//   evt.stopPropagation();//evita que los controladores de eventos de los padres sean ejecutados
-//   evt.preventDefault();//los link los deja inutilizables(la accion que pertenece al bojeto no ocurrira)
+//ficheros
+const handleFileSelect = (evt) => {
+  evt.stopPropagation();//evita que los controladores de eventos de los padres sean ejecutados
+  evt.preventDefault();//los link los deja inutilizables(la accion que pertenece al bojeto no ocurrira)
 
-//  var files=evt.target.files;
-//  console.log("mostramos lo contenido con target" + files);
+ var files=evt.target.files;
+ console.log("mostramos lo contenido con target" + files);
 
-//  var reader = new FileReader();
-//  console.log("READER" + reader);
-//  reader.onload = (e) => {
-//   $("#original").val(e.target.result);
-//  };
-//  reader.readAsText(files[0])
-// }
+ var reader = new FileReader();
+ console.log("READER" + reader);
+ reader.onload = (e) => {
+  $("#screen").val(e.target.result);
+ };
+ reader.readAsText(files[0])
+}
 
 // /* Drag and drop: el fichero arrastrado se vuelca en la textarea de entrada */
-// const handleDragFileSelect = (evt) => {
-//     evt.stopPropagation();
-//     evt.preventDefault();
+const handleDragFileSelect = (evt) => {
+    evt.stopPropagation();
+    evt.preventDefault();
 
-//     var files = evt.dataTransfer.files; // FileList object.
-//     var reader = new FileReader();
-//     reader.onload = (e) => {
+    var files = evt.dataTransfer.files; // FileList object.
+    var reader = new FileReader();
+    reader.onload = (e) => {
 
-//       $("#original").val(e.target.result);
-//       evt.target.style.background = "grey";
-//     };
-//     reader.readAsText(files[0])
-// }
+      $("#screen").val(e.target.result);
+      evt.target.style.background = "yellow";
+    };
+    reader.readAsText(files[0])
+}
 
-// const handleDragOver = (evt) => {
-//   evt.stopPropagation();
-//   evt.preventDefault();
-//   evt.target.style.background = "light-grey";
-// }
+const handleDragOver = (evt) => {
+  evt.stopPropagation();
+  evt.preventDefault();
+  evt.target.style.background = "green";
+}
 
 $(document).ready(() => {
     let screen = document.getElementById("screen");
@@ -137,13 +137,13 @@ $(document).ready(() => {
 
    
 
-//     // Setup the drag and drop listeners.
-//     //var dropZone = document.getElementsByClassName('drop_zone')[0];
-//     let dropZone = $('.drop_zone')[0];
-//     dropZone.addEventListener('dragover', handleDragOver, false);
-//     dropZone.addEventListener('drop', handleDragFileSelect, false);
-//     let inputFile = $('.inputfile')[0];
-//     inputFile.addEventListener('change', handleFileSelect, false);
+    // Setup the drag and drop listeners.
+    //var dropZone = document.getElementsByClassName('drop_zone')[0];
+    let dropZone = $('.drop_zone')[0];
+    dropZone.addEventListener('dragover', handleDragOver, false);
+    dropZone.addEventListener('drop', handleDragFileSelect, false);
+    let inputFile = $('.inputfile')[0];
+    inputFile.addEventListener('change', handleFileSelect, false);
 
 
  });
