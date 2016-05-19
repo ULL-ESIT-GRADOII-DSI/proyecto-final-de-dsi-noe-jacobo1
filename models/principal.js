@@ -106,7 +106,7 @@ return (this.operando1 / this.operando2);
 
 
 
- const Conversion = (entrada) => {  //recoge el número pulsado en el argumento.
+const Conversion = (entrada) => {  //recoge el número pulsado en el argumento.
 
 var measures = Operandos.measures;
 var match = Operandos.match(entrada);
@@ -135,16 +135,13 @@ if(match){
      console.log("La expresión casó y estamos dentro del match.");
      var operando1 = parseInt(match.operando1);
      var operando2 = parseInt(match.operando2);
-     //var simbolo = match.operacion;
+
      var simbolo = traduccion(match.operacion);
-     //console.log("\n\n----------------->>> measures.simbolo(op1,op2): "+measures[simbolo](operando1,operando2));
-     //console.log("\n--------------------->Contenido de símbolo -------> "+simbolo);
-     //console.log("operando1 :"+operando1+"  op  "+simbolo+ "  operando_2  "+operando2); //aquí llegan bien los datos.
+
      
      var source = new measures[simbolo](operando1,operando2);
      var resultado = source.resultado_operacion();
-     //document.getElementById("screen").innerHTML = resultado;
-     console.log(">Resultado--->"+resultado);
+
      return resultado;
      
     

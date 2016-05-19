@@ -1,5 +1,6 @@
 (function() {
   "use strict";
+  
   const util = require('util');
   const mongoose = require('mongoose');
 
@@ -16,61 +17,90 @@
     
 
    
-   let UserSchema = new Schema({
+  let UserSchema = new Schema({
          name: String
      });
    
    
     let AcumuladorSchema = new Schema({
-      acu: String,
-      _creator: [{type: Schema.Types.ObjectId, ref: 'User'}]
+        acu: Number,
+        _creator: [{type: Schema.Types.ObjectId, ref: 'User'}]//Schema.Types.ObjectId
     });
-    
-    
-    const User = mongoose.model('User', UserSchema);
+
     const Acumulador  = mongoose.model('Acumulador', AcumuladorSchema);
+    const User = mongoose.model('User', UserSchema);
     
     
      User.remove({}).then(() => {
         Acumulador.remove({}).then(() => {
-              
-              
-            let user1  = new User({
-                  name: "Eustaquio"
-            });
+            
                
-            user1.save(function(err){
-                if(err) return console.log(err);
-                console.log(`Saved usuario : ${user1}`);
-                    
-            //Ejemplos por defecto
-            let acum = new Acumulador({
-                        acu : "9",
-                        _creator: user1._id
-            });
-                    
-            acum.save(function(err){
-                if(err) return console.log(err); 
-                    console.log(`Saved entrada: ${acum}`);
-            }).then(()=>{
-                Acumulador
-                .findOne({ acu: "9", })
-                .populate('_creator')
-                .exec(function(err,docs){
-                        if(err) return console.log(err);
-                        console.log('Mostramos las entrada: %s',docs._creator);
-                }).then( () => {
+               let usuario_prueba1 = new User({
+                    name: "Joaquin"
+               });
+               
+               
+               usuario_prueba1.save(function(err){
+                    if(err) return console.log(err);
+                    console.log(`Saved: ${usuario_prueba1}`);
+                
+                
+                
+                let operacion_1 = new Acumulador({
+                        acu: 9,
+                        _creator: usuario_prueba1._id
+                });
+                    //Guardamos tabla en BD
+                operacion_1.save(function(err){
+                       if(err) return console.log(err); 
+                       console.log(`Saved: ${operacion_1}`);
+                }).then(()=>{
+                        Acumulador
+                        .findOne({acu:9})
+                        .populate('_creator')
+                        .exec(function(err,docs){
+                            if(err) return console.log(err);
+                            console.log('Propietario de resultado: %s',docs._creator);
+                        }).then( () => {
                            //mongoose.connection.close(); 
                         });
+                });
               });
-            });
+               
+               
+               let usuario_prueba2 = new User({
+                    name: "Fausto"
+               });
+               usuario_prueba2.save(function(err){
+                    if(err) return console.log(err);
+                    console.log(`Saved: ${usuario_prueba2}`);
+                    //Ejemplos por defecto
+                    let operacion_2 = new Acumulador({
+                        acu: 12,
+                        _creator: usuario_prueba2._id
+                    });
+                    //Guardamos tabla en BD
+                    operacion_2.save(function(err)
+                    {
+                       if(err) return console.log(err); 
+                       console.log(`Saved: ${operacion_2}`);
+                    }).then(()=>{
+                        Acumulador
+                        .findOne({acu:'12'})
+                        .populate('_creator','name')
+                        .exec(function(err,docs){
+                            if(err) return console.log(err);
+                            console.log('Propietario de resultado: %s',docs._creator);
+                        }).then( () => {
+                           //mongoose.connection.close(); 
+                        });
+                    });
+               });
+            
         });
     });
-
-   
-   
  
   
   
-  module.exports = { Datos:User, Entrada:Acumulador };
+  module.exports = { User:User, Acumulador:Acumulador };
 })();

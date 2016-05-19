@@ -8,8 +8,7 @@ body .container {
       margin-bottom: 4px;
       margin-left: 30%; }
   body .container .cambio_usuario {
-    margin-left: 4px;
-    display: none;}
+    margin-left: 4px; }
   body .container .teclas {
     padding: 10px; }
     body .container .teclas table tr {

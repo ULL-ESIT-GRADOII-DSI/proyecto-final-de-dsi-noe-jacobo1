@@ -33,21 +33,24 @@
     const Datos = (data) => {
     console.log("dato de datos "+ data);
     console.log("valor en funcion datos"+data.valor);
-    //screen.innerHTML = data.valor;
-    //$("#screen").html(_.template(resultTemplate, { rows: data.rows }));
-    $("#screen").html(data.valor);
+    $("#screen").html(data.valor);//Introducimos el valor en la pantalla
+    //-----------------------------------------------------------------------------------------
+    console.log("valor depsues de asignar"+screen.value);
+  
+    acu: $("#screen").val()
 };
 
 
 
 
-// /* Volcar en la textarea de entrada
-//  * #original el contenido del fichero fileName */
-// const dump = (fileName) => {
-//   $.get(fileName,function (data){
-//     $("#original").val(data);
-//   });
-// };
+/* Volcar en la textarea de entrada
+ * #original el contenido del fichero fileName */
+const dump = (fileName) => {
+ console.log("Nombre del fiechero" + fileName);
+  $.get(fileName,function (data){
+    $("#screen").val(data);
+  });
+};
 
 // //ficheros
 // const handleFileSelect = (evt) => {
@@ -100,6 +103,7 @@ $(document).ready(() => {
            Datos,
           'json'
         );
+       // console.log("FUERA DEL GET"+screen.value);//muestra antes de hacer el get
     });
     
  
@@ -115,11 +119,11 @@ $(document).ready(() => {
     
     
     
-//     //cargamos ejemplos input.txt
-//     $('button.example').each( (_,y) => {
-//      $(y).click( () => { 
-//          dump(`${$(y).text()}.txt`); });
-//   });
+    //cargamos ejemplos input.txt
+    $('button.example').each( (_,y) => {
+     $(y).click( () => { 
+         dump(`${$(y).text()}.txt`); });
+  });
 
 //     //Analizamos
 //     $("#parse").click( () => {

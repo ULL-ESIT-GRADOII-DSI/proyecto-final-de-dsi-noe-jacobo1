@@ -1,5 +1,20 @@
 "use strict";
 
+/* livereload
+
+    //Da fallo aunque no sé porque, me dice que no encuentra el 
+    //modulo de livereload, probé de diferentes maneras, pero nada
+    
+var livereload = require('livereload');
+server = livereload.createServer();
+server.watch(__dirname + "/public");
+var server = livereload.createServer({
+    originalPath: "http://calculadora-alu0100836059.c9users.io/"
+});
+server.watch('/home/ubuntu/workspace');
+****/
+
+
 var express = require('express');
 const app = express();
 const path = require('path');
