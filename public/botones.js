@@ -31,7 +31,7 @@
 
 // /* Volcar la tabla con el resultado en el HTML */
     const Datos = (data) => {
-    console.log("dato de datos "+ data);
+    //console.log("dato de datos "+ data);
     console.log("valor en funcion datos"+data.valor);
     $("#screen").html(data.valor);//Introducimos el valor en la pantalla
     //-----------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@
 /* Volcar en la textarea de entrada
  * #original el contenido del fichero fileName */
 const dump = (fileName) => {
- console.log("Nombre del fiechero" + fileName);
+ console.log("Nombre del fichero: " + fileName);
   $.get(fileName,function (data){
     $("#screen").val(data);
   });
@@ -63,6 +63,7 @@ const handleFileSelect = (evt) => {
  var reader = new FileReader();
  console.log("READER" + reader);
  reader.onload = (e) => {
+  console.log("valor e target: " +e.target.result);
   $("#screen").val(e.target.result);
  };
  reader.readAsText(files[0])
@@ -92,15 +93,19 @@ const handleDragOver = (evt) => {
 $(document).ready(() => {
     let screen = document.getElementById("screen");
    
-    //console.log("\n\n Mostrando original: "+original+"\n\n");
+    console.log("\n\n Mostrando screen general: "+screen.value+"\n\n");
+    
+        //cargamos ejemplos input.txt
+    $('button.example').each( (_,y) => {
+     $(y).click( () => { 
+         dump(`${$(y).text()}.txt`); });
+  });
     
     $("#igual").click( () => {
-       // if (window.localStorage) localStorage.original = original.value;
-       // console.log("#valor text area LocalStorage -> "+original.value);
-        //console.log("\n\n Mostrando original: "+original.value+"\n\n");
+        console.log("\n\n Mostrando screen dentro de igual: "+screen.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
           { input: screen.value },
-           Datos,
+           Datos,//funcion que pasamos para guardar nuestro dato(mas arriba declarada)
           'json'
         );
        // console.log("FUERA DEL GET"+screen.value);//muestra antes de hacer el get
@@ -113,17 +118,29 @@ $(document).ready(() => {
      // Ocultamos el div de registro y mostramos el nuevo (cambio_usuario)
      console.log("nombre de usuario: "+ nombre_usuario.value);
      
+     $.get("/new_user", {
+                name: $("#nombre_usuario").val()
+            });
+     
      $("#registro").css("display","none");
      $("#cambio_usuario").css("display","inline");
     });
     
     
     
-    //cargamos ejemplos input.txt
-    $('button.example').each( (_,y) => {
-     $(y).click( () => { 
-         dump(`${$(y).text()}.txt`); });
-  });
+     $("#buscar_usuario").click( (event) => {
+      event.preventDefault();
+      console.log("CLick buscar user");
+      $.get('/buscar/'+$("#nombre_usuario").val(),
+        { name: $("nombre_usuario").val()},
+        //botones_ejemplos,
+        'json'
+      );
+    });
+    
+    
+    
+
 
 //     //Analizamos
 //     $("#parse").click( () => {

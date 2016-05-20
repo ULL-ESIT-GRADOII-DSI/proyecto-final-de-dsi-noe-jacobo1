@@ -12,11 +12,9 @@
       }
   });
     
-    let Schema = mongoose.Schema;
+  let Schema = mongoose.Schema;
 
-    
 
-   
   let UserSchema = new Schema({
          name: String
      });
@@ -42,7 +40,7 @@
                
                usuario_prueba1.save(function(err){
                     if(err) return console.log(err);
-                    console.log(`Saved: ${usuario_prueba1}`);
+                  //  console.log(`Saved: ${usuario_prueba1}`);
                 
                 
                 
@@ -53,14 +51,14 @@
                     //Guardamos tabla en BD
                 operacion_1.save(function(err){
                        if(err) return console.log(err); 
-                       console.log(`Saved: ${operacion_1}`);
+                       //console.log(`Saved: ${operacion_1}`);
                 }).then(()=>{
                         Acumulador
                         .findOne({acu:9})
                         .populate('_creator')
                         .exec(function(err,docs){
                             if(err) return console.log(err);
-                            console.log('Propietario de resultado: %s',docs._creator);
+                         //   console.log('Propietario de resultado: %s',docs._creator);
                         }).then( () => {
                            //mongoose.connection.close(); 
                         });
@@ -73,29 +71,66 @@
                });
                usuario_prueba2.save(function(err){
                     if(err) return console.log(err);
-                    console.log(`Saved: ${usuario_prueba2}`);
+                   // console.log(`Saved: ${usuario_prueba2}`);
                     //Ejemplos por defecto
                     let operacion_2 = new Acumulador({
                         acu: 12,
                         _creator: usuario_prueba2._id
                     });
                     //Guardamos tabla en BD
-                    operacion_2.save(function(err)
-                    {
+                    operacion_2.save(function(err){
                        if(err) return console.log(err); 
-                       console.log(`Saved: ${operacion_2}`);
+                       //console.log(`Saved: ${operacion_2}`);
                     }).then(()=>{
                         Acumulador
                         .findOne({acu:'12'})
                         .populate('_creator','name')
                         .exec(function(err,docs){
                             if(err) return console.log(err);
-                            console.log('Propietario de resultado: %s',docs._creator);
+                            //console.log('Propietario de resultado: %s',docs._creator);
                         }).then( () => {
                            //mongoose.connection.close(); 
                         });
                     });
                });
+                        /*** Usuario 3 ***/
+                        let usuario_prueba3 = new User({
+                            name: "Fausto"
+                        });
+                        
+                         usuario_prueba3.save(function(err){
+                    if(err) return console.log(err);
+                    console.log(`Saved: ${usuario_prueba3}`);
+                
+                
+                
+                let operacion_3 = new Acumulador({
+                        acu: 125,
+                        _creator: usuario_prueba3._id
+                });
+                    //Guardamos tabla en BD
+                operacion_3.save(function(err){
+                       if(err) return console.log(err); 
+                       console.log(`Saved: ${operacion_3}`);
+                }).then(()=>{
+                        User
+                        .findOne({name:'Fausto'})
+                        .populate('_creator')
+                        .exec(function(err,docs){
+                            if(err) return console.log(err); 
+                            console.log('Documentos de Fausto: %s',docs);
+                        }).then( () => {
+                           //mongoose.connection.close(); 
+                        //   if(docs.name == "Fausto")
+                        //   console.log('Documentos de Fausto: %s',docs);
+                        });
+                });
+              });
+            //
+                        
+                        // Intentando buscar todos los documentos de un usuario
+        
+            
             
         });
     });
