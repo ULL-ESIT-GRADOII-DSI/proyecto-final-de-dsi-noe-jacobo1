@@ -35,13 +35,14 @@ app.get('/conv', (request, response) => {
 
 app.get('/new_user', (request, response) => {//midelware para la creacion de un usuario a la bdd
     let name_user = request.query.name;
+ 
     console.log("valor de aux"+name_user);
     let usuario_app = new mongodb.User({
         name:name_user
     });
     usuario_app.save(function(err){
         if(err) return console.log(err);
-    console.log(`Saved: ${usuario_app}`);
+    console.log(`Saved en /new_user: ${usuario_app}`);
     });
 });
 
@@ -50,12 +51,14 @@ app.param('usuario',function(request,response,next,name){ //param (guardar dato 
     console.log("usuario param: "+ name);
     if (name.match(/^[a-z0-9_]*$/i)) { 
       request.user = name;
-      console.log("request: "+ request.ejemplo);
+      console.log("request: "+ request.user);
     } else {  
       next(new Error(`<${name}> does not match 'usuario' requirements`));
     }
     next();
 });
+
+
 
 app.get('/buscar/:usuario',function(request,response){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
     console.log("Midelware Buscamos usuario ->"+request.user);
@@ -68,17 +71,39 @@ app.get('/buscar/:usuario',function(request,response){//Para llegar aqi primero 
                 console.log("Id:"+id._id);*/
                 const id = mongoose.Types.ObjectId(docs[0]._id);
                 console.log("Id:"+id);
-                mongodb.Acumulador.find({_creator: id},function(err,docs_acum){
+                console.log("NAME: "+docs[0].name);
+                console.log("FIND: "+ mongodb.Acumulador.find({_creator: id}));
+                mongodb.Acumulador.find({_creator: id},function(err,docs_acum){//BUsca en acumulador y devuelve lo relacionado a ID
                     if(err) {
                         console.error("Se ha producido un error->"+err);
                     } else {
-                        console.log("  Acumulador:"+docs_acum);    
+                        console.log("ACUMULADOR: "+docs_acum.acu);
+                        console.log("Buscamos por la ID del usuario: "+docs[0].name+"  Acumulador:"+docs_acum);    
                     }
-                   // response.send({contenido: data_tablas, usuario_propietario: id, mensaje_respuesta: "Busqueda realizada correctamente.", mensaje_guardado: " "});
+                     response.send({contenido: docs[0].name, usuario_propietario: id,todo:docs_acum});
+                     //response.send(docs);
+                   // response.send({contenido: data_tablas, usuario_propietario: id,});
                 });
+           }else{
+    
+               let usuario_app = new mongodb.User({
+                    name:request.user
+                });
+                usuario_app.save(function(err){
+                if(err) return console.log(err);
+                console.log("Antes de enviar respuesta");
+                response.send({contenido: " ", usuario_propietario: usuario_app._id, todo: " "});
+                }).then(() => {
+                console.log(`El usuario buscado no se encuentra en BDD por tanto lo creamos: ${usuario_app}`);
+                });
+               //response.send({contenido: docs, usuario_propietario: id});
            }
+           //response.send(docs);
+          // response.send({contenido: docs, usuario_propietario: docs[0]._id,name:docs[0].name});
      });
 });
+
+
 
 app.listen(app.get('port'), () => {
     console.log(`Node app is running at localhost: ${app.get('port')}` );

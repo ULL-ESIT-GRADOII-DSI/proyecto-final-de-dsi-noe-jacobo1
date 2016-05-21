@@ -8,20 +8,20 @@
     // del html con las que trabajar.
     // En el ejemplo de mongose se declara arriba lo siguiente 
     
-        const resultTemplate = `
-    <div class="pantalla">
-          <textarea class="drop_zone" id="result">
-              <% _.each(rows, (row) => { %>
-              <tr class="<%=row.type%>">
-                  <% _.each(row.items, (name) =>{ %>
-                  <td><%= name %></td>
-                  <% }); %>
-              </tr>
-              <% }); %>
-          </textarea>
-      </p>
-    </div>
-    `;
+    //     const resultTemplate = `
+    // <div class="pantalla">
+    //       <textarea class="drop_zone" id="result">
+    //           <% _.each(rows, (row) => { %>
+    //           <tr class="<%=row.type%>">
+    //               <% _.each(row.items, (name) =>{ %>
+    //               <td><%= name %></td>
+    //               <% }); %>
+    //           </tr>
+    //           <% }); %>
+    //       </textarea>
+    //   </p>
+    // </div>
+    // `;
     //<textarea class = "drop_zone" cols = "74" rows = "5" id="screen" name="screen">0</textarea>
     
     // Creo que gracias a esto podemos trabajar con "contenido" en
@@ -65,6 +65,7 @@ const handleFileSelect = (evt) => {
  reader.onload = (e) => {
   console.log("valor e target: " +e.target.result);
   $("#screen").val(e.target.result);
+
  };
  reader.readAsText(files[0])
 }
@@ -90,6 +91,43 @@ const handleDragOver = (evt) => {
   evt.target.style.background = "green";
 }
 
+const botonesTemplate =  `
+<div class="example">
+  <% _.each(buttons, (button) => { %>
+  <button class="example" type="button" style="width:20%" style="background-color: #87CEEB;"><%= button.nombre %></button>
+  <% }); %>
+</div>
+`;
+
+
+const textTemplate =  ` <% _.each(values, (value) => { %>
+  <textarea class="prueba" type="button" style="width:20%" style="background-color: #87CEEB;"><%= value %><%= usuario_propietario %><%=todo%></textarea>
+  <% }); %>`;
+
+const botontemplate = ` <% _.each(values, (value) => { %>
+  <button class="prueba" type="button" style="width:20%" style="background-color: #87CEEB;"><%= value %><%= usuario_propietario %><%=todo%></button>
+  <% }); %>`
+
+const botones_ejemplos = (data) => {
+  //let user_actual = data.name;
+  //console.log("Valor de data en botones ejemplo:"+user_actual);
+  //console.log("Valor de data:"+data[0].name);
+  
+  console.log("name: "+data.contenido);
+  console.log("ID: "+data.usuario_propietario);
+  console.log("TODO: "+data.todo);
+  
+ 
+  //$("#area").html("TODO: "+data.todo+" ID: "+data.usuario_propietario+" nombre: "+data.contenido);//Introducimos el valor en la pantalla
+ 
+    $("#prueba").html(_.template(textTemplate, { values: data.contenido, usuario_propietario: data.usuario_propietario, todo:data.todo}));//textarea
+    //$("#prueba").html(_.template(botontemplate, { values: data.contenido, usuario_propietario: data.usuario_propietario, todo:data.todo}));//botones
+  //$("#botones").html(_.template(botonesTemplate, { buttons: data.contenido, usuario_propietario: data.usuario_propietario}));
+
+
+}
+
+
 $(document).ready(() => {
     let screen = document.getElementById("screen");
    
@@ -97,8 +135,10 @@ $(document).ready(() => {
     
         //cargamos ejemplos input.txt
     $('button.example').each( (_,y) => {
-     $(y).click( () => { 
-         dump(`${$(y).text()}.txt`); });
+     $(y).click( (evt) => { 
+         dump(`${$(y).text()}.txt`); 
+      evt.target.style.background = "green";
+     });
   });
     
     $("#igual").click( () => {
@@ -128,15 +168,19 @@ $(document).ready(() => {
     
     
     
-     $("#buscar_usuario").click( (event) => {
+     $("#buscar_usuario").click( (event) => {//este boton implementado ahora mismo como busqeda y sino pues lo crea
       event.preventDefault();
       console.log("CLick buscar user");
       $.get('/buscar/'+$("#nombre_usuario").val(),
         { name: $("nombre_usuario").val()},
-        //botones_ejemplos,
+        botones_ejemplos,
         'json'
       );
     });
+    
+    
+  
+    
     
     
     

@@ -57,7 +57,7 @@ const numero = (digito) => {  //recoge el número pulsado en el argumento.
         flag_num = 0; //el número está iniciado y podemos ampliarlo.
         console.log("Chivato final numero en pantalla: "+num_screen);
     }
-             
+          console.log("AQI");   
 };
 
 

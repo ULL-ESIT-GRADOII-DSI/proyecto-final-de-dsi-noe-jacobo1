@@ -40,7 +40,7 @@
                
                usuario_prueba1.save(function(err){
                     if(err) return console.log(err);
-                  //  console.log(`Saved: ${usuario_prueba1}`);
+                   console.log(`Saved: ${usuario_prueba1}`);
                 
                 
                 
@@ -71,7 +71,7 @@
                });
                usuario_prueba2.save(function(err){
                     if(err) return console.log(err);
-                   // console.log(`Saved: ${usuario_prueba2}`);
+                   console.log(`Saved: ${usuario_prueba2}`);
                     //Ejemplos por defecto
                     let operacion_2 = new Acumulador({
                         acu: 12,
@@ -111,14 +111,15 @@
                     //Guardamos tabla en BD
                 operacion_3.save(function(err){
                        if(err) return console.log(err); 
-                       console.log(`Saved: ${operacion_3}`);
+                       //console.log(`Saved: ${operacion_3}`);
                 }).then(()=>{
                         User
                         .findOne({name:'Fausto'})
                         .populate('_creator')
                         .exec(function(err,docs){
                             if(err) return console.log(err); 
-                            console.log('Documentos de Fausto: %s',docs);
+                            //console.log('Documentos de Fausto: %s',docs);
+                            //console.log('Total de elementos en la BDD %s'docs.count());
                         }).then( () => {
                            //mongoose.connection.close(); 
                         //   if(docs.name == "Fausto")
