@@ -16,7 +16,9 @@
 
 
   let UserSchema = new Schema({
-         name: String
+         name: String,
+         correo: String,
+         contrasenia:String
      });
    
    
@@ -34,7 +36,9 @@
             
                
                let usuario_prueba1 = new User({
-                    name: "Joaquin"
+                    name: "Joaquin",
+                    correo : "joaqin@gmail.com",
+                    contrasenia : "1234"
                });
                
                
@@ -67,7 +71,9 @@
                
                
                let usuario_prueba2 = new User({
-                    name: "Fausto"
+                    name: "Fausto",
+                    correo : "fausto@gmail.com",
+                    contrasenia : "5678"
                });
                usuario_prueba2.save(function(err){
                     if(err) return console.log(err);
@@ -95,7 +101,9 @@
                });
                         /*** Usuario 3 ***/
                         let usuario_prueba3 = new User({
-                            name: "Fausto"
+                            name: "Pepe",
+                            correo : "pepe@gmail.com",
+                            contrasenia : "pepe1"
                         });
                         
                          usuario_prueba3.save(function(err){
@@ -114,7 +122,7 @@
                        //console.log(`Saved: ${operacion_3}`);
                 }).then(()=>{
                         User
-                        .findOne({name:'Fausto'})
+                        .findOne({name:'Pepe'})
                         .populate('_creator')
                         .exec(function(err,docs){
                             if(err) return console.log(err); 

@@ -21,10 +21,25 @@ const conversion = require('./models/principal.js');
 const mongodb = require('./models/dbmongo.js');
 
 
+/*****/
+app.get('/registro', function(request, response){
+      response.render('registro', {title: "Sing UP", error:""});
+});
+app.get('/iniciar', function(request, response){
+      response.render('iniciar', {title: "Sing IN", error:""});
+});
+app.get('/superprincipal', function(request, response){
+        var name = request.user;
+        console.log("valor de name"+ name);
+      response.render('super_principal', {title: "App_SupeR", usuario: name});
+});
+
+
+
 //renderiza el index
 app.get('/', (request, response) => {
   response.render('index',
-  {title : 'App_SupeR', error:"" })
+  {title : 'App_INICIO', error:"" })
 });
 //renderiza la pagina de la calculadora
 app.get('/calculadora', (request, response) => {
@@ -32,10 +47,6 @@ app.get('/calculadora', (request, response) => {
   {title : 'Calculadora myApp', error:"" })
 });
 
-// app.get('/index.html', (request, response) => {
-//     response.render('index',
-//     {title: 'App_SupeR', error: ""})
-// });
 
 //renderiza la pagina fruteria
 app.get('/fruteria', function(req, res, next){
@@ -58,32 +69,29 @@ app.get('/conv', (request, response) => {
     console.log("valor de aux"+aux);
     response.send({ 'valor': conversion(request.query.input) });
 });
-/*****/
-app.get('/registro', function(req, res, next){
-      res.render('registro', {title: "Sing UP", error:""});
-});
-app.get('/iniciar', function(req, res, next){
-      res.render('iniciar', {title: "Sing IN", error:""});
-});
-app.get('/index2', function(req, res, next){
-      res.render('index2', {title: "App_SupeR", error:""});
-});
-
 
 /*****/
 
 //Creacion de usuarios en BDD mongo
 app.get('/new_user', (request, response) => {//midelware para la creacion de un usuario a la bdd
     let name_user = request.query.name;
+    let pass = request.query.contrasenia;
+    let correo = request.query.correo;
+    
  
-    console.log("valor de aux"+name_user);
+    console.log("nombre: "+name_user);
+    console.log("valor de password: "+pass);
+    console.log("valor de correo: "+correo);
     let usuario_app = new mongodb.User({
-        name:name_user
+        name:name_user,
+        contrasenia: pass,
+        correo:correo
     });
     usuario_app.save(function(err){
         if(err) return console.log(err);
     console.log(`Saved en /new_user: ${usuario_app}`);
     });
+
 });
 
 
@@ -98,11 +106,39 @@ app.param('usuario',function(request,response,next,name){ //param (guardar dato 
     next();
 });
 
+app.param('contrasenia',function(request,response,next,contrasenia){ //param (guardar dato en el midelware)
+
+    console.log("CONTRASENIA PARAMs: "+ contrasenia);
+    if (contrasenia.match(/^[a-z0-9_]*$/i)) { 
+      request.contrasenia = contrasenia;
+      console.log("request: "+ request.contrasenia);
+    } else {  
+      next(new Error(`<${contrasenia}> does not match 'usuario' requirements`));
+    }
+    next();
+});
+
+app.param('correo',function(request,response,next,correo){ //param (guardar dato en el midelware)
+
+    console.log("CoRREO PARAMs: "+ correo);
+    //if (correo.match(/^[a-z0-9_]*$/i)) { 
+      request.correo = correo;
+      console.log("request: "+ request.correo);
+    //} else {  
+    //  next(new Error(`<${correo}> does not match 'usuario' requirements`));
+    //}
+    next();
+});
 
 
-app.get('/buscar/:usuario',function(request,response){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
+
+
+
+app.get('/buscar/:usuario/:contrasenia/:correo',function(request,response){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
     console.log("Midelware Buscamos usuario ->"+request.user);
-     mongodb.User.find({name: request.user},function(err,docs){
+    console.log("Midelware Buscamos cprreo ->"+request.correo);
+    console.log("Midelware Buscamos password ->"+request.contrasenia);
+     mongodb.User.find({name: request.user, contrasenia: request.contrasenia},function(err,docs){
          
            if(docs.length > 0){
                 //console.log("Error:"+err);
@@ -117,6 +153,7 @@ app.get('/buscar/:usuario',function(request,response){//Para llegar aqi primero 
                     if(err) {
                         console.error("Se ha producido un error->"+err);
                     } else {
+                        console.log("EL USUARIO EXISTE EN LA BDD")
                         console.log("ACUMULADOR: "+docs_acum.acu);
                         console.log("Buscamos por la ID del usuario: "+docs[0].name+"  Acumulador:"+docs_acum);    
                     }
@@ -127,7 +164,9 @@ app.get('/buscar/:usuario',function(request,response){//Para llegar aqi primero 
            }else{
     
                let usuario_app = new mongodb.User({
-                    name:request.user
+                    name:request.user,
+                    correo: request.correo,
+                    contrasenia: request.contrasenia
                 });
                 usuario_app.save(function(err){
                 if(err) return console.log(err);

@@ -1,0 +1,26 @@
+body .container {
+  background-color: #848484;
+  width: 40%;
+  position: relative;
+  top:75px;
+  margin: auto; }
+  body .container .registro {
+    margin-left: 4px; }
+    body .container .registro input {
+      margin-bottom: 4px;
+      margin-left: 30%; }
+  body .container .cambio_usuario {
+    margin-left: 4px; }
+  body .container .teclas {
+    padding: 10px; }
+    body .container .teclas table tr {
+      height: 30px; }
+      body .container .teclas table tr td {
+        width: 7%; }
+        body .container .teclas table tr td input {
+          width: 100%;
+          -webkit-border-radius: 4px;
+          -moz-border-radius: 4px;
+          border-radius: 4px; }
+
+/*# sourceMappingURL=generado_SASS.css.map */
