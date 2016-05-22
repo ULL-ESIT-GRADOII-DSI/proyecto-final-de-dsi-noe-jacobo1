@@ -65,6 +65,10 @@ app.get('/registro', function(req, res, next){
 app.get('/iniciar', function(req, res, next){
       res.render('iniciar', {title: "Sing IN", error:""});
 });
+app.get('/index2', function(req, res, next){
+      res.render('index2', {title: "App_SupeR", error:""});
+});
+
 
 /*****/
 
