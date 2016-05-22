@@ -1,6 +1,8 @@
 body .container {
   background-color: #848484;
   width: 40%;
+  position: relative;
+  top:75px;
   margin: auto; }
   body .container .registro {
     margin-left: 4px; }

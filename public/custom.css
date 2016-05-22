@@ -7,7 +7,7 @@ position : absolute;
 top: 0;
 left : 0;
 width : 100%;
-background : url(./img/nav_background.png);
+background : url('./img/nav_background.png');
 }
 .menu_superior ul {
 margin : 0 auto;
@@ -39,8 +39,77 @@ color : #fff;
 .menu_superior ul li.selected a {
 color : #fff;
 }
+/* Para singIN*/
+.login {
+  top: 150px;
+  position: relative;
+  margin: 20px auto;
+  width: 300px;
+  padding: 30px 25px;
+  background: white;
+  border: 1px solid #c4c4c4;
+}
+
+h1.login-title {
+  margin: -28px -25px 25px;
+  padding: 15px 25px;
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+  color: #ADADAD;
+  text-align:center;
+  background: #f7f7f7;
+ 
+}
+
+.login-input {
+  width: 285px;
+  height: 50px;
+  margin-bottom: 25px;
+  padding-left:10px;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.login-input:focus {
+    border-color:#6e8095;
+    outline: none;
+  }
+.login-button {
+  width: 100%;
+  height: 50px;
+  padding: 0;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  background: #f0776c;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer; 
+  outline:0;
+}
+
+.login-lost
+{
+  text-align:center;
+  margin-bottom:0px;
+}
+
+.login-lost a
+{
+  color:#666;
+  text-decoration:none;
+  font-size:13px;
+}
+
+
+
+
+/**/
+
 .productos {
-  border-style: solid;
+  /*border-style: solid;*/
   border-radius: 10px;
 
   width: 75%;
@@ -80,7 +149,7 @@ color : #fff;
   top: 150px;*/
   margin: 15px;
   margin-right: 100px;
-  margin-top: 100px;
+  margin-top: 50px;
   position: relative;
   width: 80%;
   height: 300px;
@@ -88,7 +157,7 @@ color : #fff;
 
   margin-left: auto;
   float: none;
-  border-style: solid;
+  /*border-style: solid;*/
   border-radius: 10px;
 }
 

@@ -24,7 +24,7 @@ const mongodb = require('./models/dbmongo.js');
 //renderiza el index
 app.get('/', (request, response) => {
   response.render('index',
-  {title : 'MyApp', error:"" })
+  {title : 'App_SupeR', error:"" })
 });
 //renderiza la pagina de la calculadora
 app.get('/calculadora', (request, response) => {
@@ -32,9 +32,24 @@ app.get('/calculadora', (request, response) => {
   {title : 'Calculadora myApp', error:"" })
 });
 
+// app.get('/index.html', (request, response) => {
+//     response.render('index',
+//     {title: 'App_SupeR', error: ""})
+// });
+
 //renderiza la pagina fruteria
 app.get('/fruteria', function(req, res, next){
       res.render('fruteria', {title: "Fruteria APP", error:""});
+});
+
+//renderiza la pagina pescaderia
+app.get('/pescaderia', function(req, res, next){
+      res.render('pescaderia', {title: "Pescaderia APP", error:""});
+});
+
+//renderiza la pagina fruteria
+app.get('/charcuteria', function(req, res, next){
+      res.render('charcuteria', {title: "Charcuteria APP", error:""});
 });
 
 //Operacion de la calculadora
@@ -43,7 +58,15 @@ app.get('/conv', (request, response) => {
     console.log("valor de aux"+aux);
     response.send({ 'valor': conversion(request.query.input) });
 });
+/*****/
+app.get('/registro', function(req, res, next){
+      res.render('registro', {title: "Sing UP", error:""});
+});
+app.get('/iniciar', function(req, res, next){
+      res.render('iniciar', {title: "Sing IN", error:""});
+});
 
+/*****/
 
 //Creacion de usuarios en BDD mongo
 app.get('/new_user', (request, response) => {//midelware para la creacion de un usuario a la bdd
