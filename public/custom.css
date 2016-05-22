@@ -1,0 +1,183 @@
+body {
+  background-color: #FF8000;
+  height: 100%;
+}
+.menu_superior {
+position : absolute;
+top: 0;
+left : 0;
+width : 100%;
+background : url(./img/nav_background.png);
+}
+.menu_superior ul {
+margin : 0 auto;
+width : 940px;
+list-style : none;
+}
+.menu_superior ul ul{
+  display: none;
+}
+.menu_superior ul li {
+float : left;
+}
+.menu_superior ul li a {
+display : block;
+margin-right : 20px;
+width : 140px;
+font-size : 14px;
+line-height : 44px;
+text-align : center;
+text-decoration : none;
+color : #ccc;
+}
+.menu_superior ul li:hover ul{
+  display: inline;
+}
+.menu_superior ul li a:hover {
+color : #fff;
+}
+.menu_superior ul li.selected a {
+color : #fff;
+}
+.productos {
+  border-style: solid;
+  border-radius: 10px;
+
+  width: 75%;
+  padding: 10px;
+  top: 100px;
+  float: left;
+}
+.productos h1 {
+  font-size: 2.5em;
+}
+.productos table{
+  width: 100%;
+}
+.productos table .principal td{
+  font-size: 2em;
+}
+.productos table tr td{
+  font-size: 1.2em;
+  margin: 30px;
+}
+
+.carrito_compra {
+  border-style: solid;
+  border-radius: 10px;
+  right: 0px;
+  width: 200px;
+  padding: 10px;
+  top: 200px;
+  float:right;
+}
+.carrito_compra textarea{
+  border-radius: 10px;
+}
+.segundo{
+  /*position: fixed;
+  left: 100px;
+  top: 150px;*/
+  margin: 15px;
+  margin-right: 100px;
+  margin-top: 100px;
+  position: relative;
+  width: 80%;
+  height: 300px;
+  padding: 10px;
+
+  margin-left: auto;
+  float: none;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.enlace_boton {    font-family: verdana, arial, sans-serif;
+   font-size: 10pt;
+   font-weight: bold;
+   padding: 4px;
+   background-color: #ffffcc;
+   color: #666666;
+   text-decoration: none;
+}
+.enlace_boton:link,
+.enlace_boton:visited {
+   border-top: 1px solid #cccccc;
+   border-bottom: 2px solid #666666;
+   border-left: 1px solid #cccccc;
+   border-right: 2px solid #666666;
+}
+.enlace_boton:hover {
+    border-bottom: 1px solid #cccccc;
+   border-top: 2px solid #666666;
+   border-right: 1px solid #cccccc;
+   border-left: 2px solid #666666;
+}
+
+
+.categorias{
+  position: relative;
+  position: absolute;
+  /*top: 300px;*/
+  left: 300px;
+}
+/*#charcuteria{
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}*/
+.botones_generales{
+  margin: 60px;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+.botones_generales:hover{
+  background-color: #3e8e41;
+}
+.botones_generales:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+/*#fruteria{
+  margin: 10%;
+  text-decoration: none;
+  background-image: url(./img/fruteria.jpg);
+  background-repeat:no-repeat;
+  height:100px;
+  width:100px;
+  background-position:center;
+}*/
+
+
+.pie {
+  background-color: black;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  position: fixed;
+}
+
+.pie p {
+  font: #fff;
+}
