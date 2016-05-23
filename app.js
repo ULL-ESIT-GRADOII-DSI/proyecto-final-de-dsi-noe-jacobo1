@@ -209,8 +209,8 @@ app.get('/sesion',function(request,response,next){//Para llegar aqi primero tien
            if(docs.length > 0){
                 console.log("ENTRAMOS EN LA BUSQUEDA:");
                 console.log("Id de usuario:"+docs[0]._id);
-                /*var id = new ObjectId(data[0]._id);
-                console.log("Id:"+id._id);*//*
+                var id = new ObjectId(data[0]._id);
+                console.log("Id:"+id._id);
                 const id = mongoose.Types.ObjectId(docs[0]._id);
                 console.log("Id:"+id);
                 console.log("NAME: "+docs[0].name);
@@ -242,7 +242,7 @@ app.get('/sesion',function(request,response,next){//Para llegar aqi primero tien
 });
 
 
-*******************************************/
+/*******************************************/
 
 //Opcion de boton inicio de sesion, busca en la bdd y sino lo crea
 //!!!!app.post pero no renderiza!!!!!!!
