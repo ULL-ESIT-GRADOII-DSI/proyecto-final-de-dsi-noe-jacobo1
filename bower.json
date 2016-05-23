@@ -1,0 +1,17 @@
+{
+  "name": "bower",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "alu0100622492 <alu0100622492@ull.edu.es>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/noe-jacoboDSI/Calculadora",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

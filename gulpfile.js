@@ -2,6 +2,10 @@ var gulp = require('gulp');
 var nodemon = require('gulp-nodemon');
 var notify = require('gulp-notify');
 var livereload = require('gulp-livereload');
+var browserify = require("browserify");
+var uglify = require("gulp-uglify");
+var source = require('vinyl-source-stream');
+var buffer = require("vinyl-buffer");
  
 // Task
 gulp.task('default', function() {
@@ -18,4 +22,23 @@ gulp.task('default', function() {
 			.pipe(livereload())
 			.pipe(notify('Reloading page, please wait...'));
 	});
+});
+
+/*gulp.task('browserify', function() {  
+  return browserify('./app.js')
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(gulp.dest('./public/js'));
+});*/
+
+ 
+gulp.task('browserify', function() {
+    return browserify('./app.js')
+        .bundle()
+        //Pass desired output filename to vinyl-source-stream
+        .pipe(source('bundle.js'))
+        // Start piping stream to tasks!
+        .pipe(gulp.dest('./build/'));
 });

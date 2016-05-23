@@ -152,8 +152,8 @@ $(document).ready(() => {
     //boton iniciar seesion iniciar.ejs
       
       $("#inicio").click(() => {
-        console.log("\n\n Mostrando valor de iniciar sesion user: "+nombre_usuario.value+"\n");
-        console.log("\n\n Mostrando valor de iniciar sesion password: "+contrasenia.value+"\n");
+         //console.log("\n\n Mostrando valor de iniciar sesion user: "+nombre_usuario.value+"\n");
+         //console.log("\n\n Mostrando valor de iniciar sesion password: "+contrasenia.value+"\n");
         
         $.get('/sesion/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val(),
         { name: $("nombre_usuario").val(),
