@@ -73,6 +73,9 @@ app.get('/error', function(request, response){
 });
 /*****/
 
+
+/******/
+
 //Creacion de usuarios en BDD mongo
 app.get('/new_user', (request, response) => {//midelware para la creacion de un usuario a la bdd
     let name_user = request.query.name;
@@ -161,7 +164,7 @@ app.get('/buscar/:usuario/:contrasenia/:correo',function(request,response,next){
                      //response.send({contenido: docs[0].name, usuario_propietario: id,todo:docs_acum});
                      //console.alert("Usuario ya existente");
                      //response.send(docs);
-                    response.render('super_principal',{name: docs[0].name, usuario_propietario: id,});
+                    response.render('super_principal',{name: docs[0].name, usuario_propietario: id,title: "SUPER APP"});
                 });
            }else{
     
@@ -174,9 +177,10 @@ app.get('/buscar/:usuario/:contrasenia/:correo',function(request,response,next){
                 if(err) return console.log(err);
                 console.log("Antes de enviar respuesta");
                 //response.next({contenido: " ", usuario_propietario: usuario_app._id, todo: " "});
-                response.render('super_principal', {contenido: " ", usuario_propietario: usuario_app._id, todo: " ",title: "SUPER APP"});
+                //response.render('super_principal', {contenido: " ", usuario_propietario: usuario_app._id, todo: " ",title: "SUPER APP"});
                 }).then(() => {
                 console.log(`El usuario buscado no se encuentra en BDD por tanto lo creamos: ${usuario_app}`);
+                response.render('super_principal', {contenido: " ", usuario_propietario: usuario_app._id, todo: " ",title: "SUPER APP"});
                 });
                //response.send({contenido: docs, usuario_propietario: id});
            }
@@ -185,10 +189,17 @@ app.get('/buscar/:usuario/:contrasenia/:correo',function(request,response,next){
      });
 });
 
+// app.get('/fruteria', function(req, res, next){
+//       res.render('fruteria', {title: "Fruteria APP", error:""});
+// });
 
+app.get('/iniciar#', function(req, res) {
+    res.render('super_principal', {title: "App_SupeR", error:""});
+});
 
+/*********************************************************************************************
 //Opcion de boton inicio de sesion, busca en la bdd y sino lo crea
-
+//!!!!app.post pero no renderiza!!!!!!!
 app.get('/sesion/:usuario/:contrasenia',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
     console.log("Midelware Buscamos usuario ->"+request.user);
     console.log("Midelware Buscamos password ->"+request.contrasenia);
@@ -198,7 +209,7 @@ app.get('/sesion/:usuario/:contrasenia',function(request,response,next){//Para l
                 //console.log("Error:"+err);
                 console.log("Id de usuario:"+docs[0]._id);
                 /*var id = new ObjectId(data[0]._id);
-                console.log("Id:"+id._id);*/
+                console.log("Id:"+id._id);
                 const id = mongoose.Types.ObjectId(docs[0]._id);
                 console.log("Id:"+id);
                 console.log("NAME: "+docs[0].name);
@@ -212,7 +223,7 @@ app.get('/sesion/:usuario/:contrasenia',function(request,response,next){//Para l
                         console.log("Buscamos por la ID del usuario: "+docs[0].name+"  Acumulador:"+docs_acum);    
                     }
                      //response.send({contenido: docs[0].name, usuario_propietario: id,todo:docs_acum});
-                     //console.alert("Usuario ya existente");
+                     //console.alert("Usuario ya existente"); 
                      //response.send(docs);
                     response.render('super_principal',{name: docs[0].name, usuario_propietario: id,title:"Ha surgido un error no existe en la BDD"});
                 });
@@ -221,12 +232,14 @@ app.get('/sesion/:usuario/:contrasenia',function(request,response,next){//Para l
                console.log("El usuario no se encuentra en la BDD");
                response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
            }
-           response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
+           //response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
+           //next();
            //response.send(docs);
           // response.send({contenido: docs, usuario_propietario: docs[0]._id,name:docs[0].name});
      });
+     //response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
 });
-
+***************************************************************/
 app.listen(app.get('port'), () => {
     console.log(`Node app is running at localhost: ${app.get('port')}` );
 });

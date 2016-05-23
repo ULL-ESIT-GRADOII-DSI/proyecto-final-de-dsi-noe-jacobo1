@@ -132,8 +132,8 @@ $(document).ready(() => {
     let screen = document.getElementById("screen");
     
     //boton registrarse registro.ejs
-    $("#registrarse").click( (event) => {
-        event.preventDefault();
+    $("#registrarse").click( () => {
+        
         console.log("\n\n Mostrando valor de registrarse: "+nombre_usuario.value+"\n");
         console.log("\n\n Mostrando valor de registrarse: "+correo.value+"\n");
         console.log("\n\n Mostrando valor de registrarse: "+contrasenia.value+"\n");
@@ -150,8 +150,8 @@ $(document).ready(() => {
     });
     
     //boton iniciar seesion iniciar.ejs
-      $("#inicio").click( (event) => {
-          event.preventDefault();
+      
+      $("#inicio").click(() => {
         console.log("\n\n Mostrando valor de iniciar sesion user: "+nombre_usuario.value+"\n");
         console.log("\n\n Mostrando valor de iniciar sesion password: "+contrasenia.value+"\n");
         
@@ -217,7 +217,7 @@ $(document).ready(() => {
         var precio = parseFloat(valor * 3.46).toFixed(2);
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = "->"+valor+" Kg de pechuga de pollo = "+precio+"\n";
+        var nuevo = "->"+valor+" Kg de pechuga de pollo = "+precio+"€\n";
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
@@ -227,7 +227,7 @@ $(document).ready(() => {
         var precio = parseFloat(valor).toFixed(2) * 2.55;
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = " + "+valor+" Kg de chuleta de cerdo = "+TOTAL;
+        var nuevo = " + "+valor+" Kg de chuleta de cerdo = "+TOTAL+"€" ;
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
@@ -235,7 +235,7 @@ $(document).ready(() => {
         var valor = parseFloat(document.getElementById("i3").value);
         var precio = parseFloat(valor * 4.99).toFixed(2);
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = " + "+valor+" Kg de carne mechada de res = "+TOTAL;
+        var nuevo = " + "+valor+" Kg de carne mechada de res = "+TOTAL+"€";
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
@@ -246,7 +246,7 @@ $(document).ready(() => {
         var precio = parseFloat(valor * 11.26).toFixed(2);
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = " + "+valor+" Kg de gambas frescas = "+TOTAL;
+        var nuevo = " + "+valor+" Kg de gambas frescas = "+TOTAL+"€";
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
@@ -255,8 +255,8 @@ $(document).ready(() => {
         var precio = parseFloat(valor).toFixed(2) * 9.55;
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = " + "+valor+" Kg de pulpo gallego = "+TOTAL;
-        console.log("valor de total y de alltext: "+TOTAL+ALL_TEXT);
+        var nuevo = " + "+valor+" Kg de pulpo gallego = "+TOTAL+"€";
+        console.log("valor de total y de alltext: "+TOTAL+ALL_TEXT+"€");
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
@@ -265,7 +265,7 @@ $(document).ready(() => {
         var precio = parseFloat(valor * 6.35).toFixed(2);
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
         var nuevo = " + "+valor+" Kg de dorada = "+TOTAL;
-        console.log("valor de total y de alltext: "+TOTAL+ALL_TEXT);
+        console.log("valor de total y de alltext: "+TOTAL+ALL_TEXT+"€");
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
