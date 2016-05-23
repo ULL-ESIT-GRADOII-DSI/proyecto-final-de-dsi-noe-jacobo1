@@ -131,7 +131,85 @@ const botones_ejemplos = (data) => {
 $(document).ready(() => {
     let screen = document.getElementById("screen");
     
-    var TOTAL = parseFloat(0);
+    //boton registrarse registro.ejs
+    $("#registrarse").click( (event) => {
+        event.preventDefault();
+        console.log("\n\n Mostrando valor de registrarse: "+nombre_usuario.value+"\n");
+        console.log("\n\n Mostrando valor de registrarse: "+correo.value+"\n");
+        console.log("\n\n Mostrando valor de registrarse: "+contrasenia.value+"\n");
+        
+        $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
+        { name: $("nombre_usuario").val(),
+            correo: $("correo").val(),
+            contrasenia: $("contrasenia").val(),
+        },
+        botones_ejemplos,
+        'json'
+      );
+        
+    });
+    
+    //boton iniciar seesion iniciar.ejs
+      $("#inicio").click( (event) => {
+          event.preventDefault();
+        console.log("\n\n Mostrando valor de iniciar sesion user: "+nombre_usuario.value+"\n");
+        console.log("\n\n Mostrando valor de iniciar sesion password: "+contrasenia.value+"\n");
+        
+        $.get('/sesion/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val(),
+        { name: $("nombre_usuario").val(),
+            contrasenia: $("contrasenia").val(),
+        },
+        botones_ejemplos,
+        'json'
+      );
+        
+    });
+    
+        //cargamos ejemplos input.txt(Calculadora)
+    $('button.example').each( (_,y) => {
+     $(y).click( (evt) => { 
+         dump(`${$(y).text()}.txt`); 
+      evt.target.style.background = "green";
+     });
+  });
+    
+    //(Calculadora)
+    $("#igual").click( () => {
+        console.log("\n\n Mostrando screen dentro de igual: "+screen.value+"\n\n");
+         $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
+          { input: screen.value },
+           Datos,//funcion que pasamos para guardar nuestro dato(mas arriba declarada)
+          'json'
+        );
+       // console.log("FUERA DEL GET"+screen.value);//muestra antes de hacer el get
+    });
+    
+ 
+    
+    //Igual que registrarse
+     $("#buscar_usuario").click( (event) => {//este boton implementado ahora mismo como busqeda y sino pues lo crea
+      event.preventDefault();
+      console.log("CLick buscar user");
+      
+        $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
+        { name: $("nombre_usuario").val(),
+            correo: $("correo").val(),
+            contrasenia: $("contrasenia").val(),
+        },
+        botones_ejemplos,
+        'json'
+      );
+    });
+    
+    
+  
+    
+    
+    
+    
+
+//Botones text area diferentes modulos
+   var TOTAL = parseFloat(0);
     var ALL_TEXT = " ";
     
      $("#c1").click(() => {
@@ -223,103 +301,6 @@ $(document).ready(() => {
         $("#carrito").val(ALL_TEXT);
     });
     /************************************/
-    
-    $("#registrarse").click( (event) => {
-        console.log("\n\n Mostrando valor de registrarse: "+nombre_usuario.value+"\n");
-        console.log("\n\n Mostrando valor de registrarse: "+correo.value+"\n");
-        console.log("\n\n Mostrando valor de registrarse: "+contrasenia.value+"\n");
-        
-        $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
-        { name: $("nombre_usuario").val(),
-            correo: $("correo").val(),
-            contrasenia: $("contrasenia").val(),
-        },
-        botones_ejemplos,
-        'json'
-      );
-        
-        //  $.get("/new_user", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
-        //   { name: nombre_usuario.value,
-        //     correo: correo.value,
-        //     contrasenia:contrasenia.value
-        //   },
-        //   Datos,//funcion que pasamos para guardar nuestro dato(mas arriba declarada)
-        //   'json'
-        // );
-        
-        
-        
-       // console.log("FUERA DEL GET"+screen.value);//muestra antes de hacer el get
-    });
-    
-        //cargamos ejemplos input.txt
-    $('button.example').each( (_,y) => {
-     $(y).click( (evt) => { 
-         dump(`${$(y).text()}.txt`); 
-      evt.target.style.background = "green";
-     });
-  });
-    
-    $("#igual").click( () => {
-        console.log("\n\n Mostrando screen dentro de igual: "+screen.value+"\n\n");
-         $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
-          { input: screen.value },
-           Datos,//funcion que pasamos para guardar nuestro dato(mas arriba declarada)
-          'json'
-        );
-       // console.log("FUERA DEL GET"+screen.value);//muestra antes de hacer el get
-    });
-    
- 
-    $('#boton_nombre').click(() => {
-     // Aquí deberemos guardar el nombre que está contenido 
-     // en el input con id y nombre = "nombre_usuario"
-     // Ocultamos el div de registro y mostramos el nuevo (cambio_usuario)
-     console.log("nombre de usuario: "+ nombre_usuario.value);
-     
-    //  $.get("/new_user", {
-    //             name: $("#nombre_usuario").val()
-    //         });
-     
-    //  $("#registro").css("display","none");
-    //  $("#cambio_usuario").css("display","inline");
-     });
-    
-    
-    
-     $("#buscar_usuario").click( (event) => {//este boton implementado ahora mismo como busqeda y sino pues lo crea
-      event.preventDefault();
-      console.log("CLick buscar user");
-      
-        $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
-        { name: $("nombre_usuario").val(),
-            correo: $("correo").val(),
-            contrasenia: $("contrasenia").val(),
-        },
-        botones_ejemplos,
-        'json'
-      );
-    });
-    
-    
-  
-    
-    
-    
-    
-
-
-//     //Analizamos
-//     $("#parse").click( () => {
-//         if (window.localStorage) localStorage.original = original.value;
-//         $.get("/csv", 
-//           { input: original.value },
-//           fillTable,
-//           'json'
-//         );
-//     });
-
-   
 
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];
