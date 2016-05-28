@@ -128,10 +128,28 @@ const botones_ejemplos = (data) => {
 
 }
 
+
+const resultTemplate = `
+<div class="contenido">
+      <table class="center" id="result">
+          <% _.each(rows, (row) => { %>
+          <tr class="<%=row.type%>">
+              <% _.each(row.items, (name) =>{ %>
+              <td><%= name %></td>
+              <% }); %>
+          </tr>
+          <% }); %>
+      </table>
+  </p>
+</div>
+`;
+
 const generar_factura = (data) => {
     console.log("valor de data"+data.factura);
+     $("#prueba").html(_.template(resultTemplate, { rows: data.factura }));
+    //  $("#prueba").html(data.factura);
     
-}
+} 
 
 
 $(document).ready(() => {
