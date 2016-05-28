@@ -112,6 +112,7 @@ const botones_ejemplos = (data) => {
   //let user_actual = data.name;
   //console.log("Valor de data en botones ejemplo:"+user_actual);
   //console.log("Valor de data:"+data[0].name);
+  console.log("LLegamos a la creacion de ejemplo");
   
   console.log("name: "+data.contenido);
   console.log("ID: "+data.usuario_propietario);
@@ -125,6 +126,11 @@ const botones_ejemplos = (data) => {
   //$("#botones").html(_.template(botonesTemplate, { buttons: data.contenido, usuario_propietario: data.usuario_propietario}));
 
 
+}
+
+const generar_factura = (data) => {
+    console.log("valor de data"+data.factura);
+    
 }
 
 
@@ -152,14 +158,29 @@ $(document).ready(() => {
     //boton iniciar seesion iniciar.ejs
       
       $("#inicio").click(() => {
-         //console.log("\n\n Mostrando valor de iniciar sesion user: "+nombre_usuario.value+"\n");
-         //console.log("\n\n Mostrando valor de iniciar sesion password: "+contrasenia.value+"\n");
+         console.log("\n\n Mostrando valor de iniciar sesion user: "+nombre_usuario.value+"\n");
+         console.log("\n\n Mostrando valor de iniciar sesion password: "+contrasenia.value+"\n");
         
-        $.get('/sesion/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val(),
-        { name: $("nombre_usuario").val(),
-            contrasenia: $("contrasenia").val(),
+        $.get('/sesion',
+        {   name:nombre_usuario.value,
+            contrasenia:contrasenia.value
         },
         botones_ejemplos,
+        'json'
+      );
+      });
+      
+      //boton generar factura charctueria.ejs
+      
+      $("#generar_factura").click(() => {
+         console.log("\n\n Dentro de generar factura: \n");
+         console.log("Valor de textarea"+carrito.value);
+         
+        
+        $.get('/generar',
+        {   factura:carrito.value
+        },
+        generar_factura,
         'json'
       );
         
@@ -217,7 +238,7 @@ $(document).ready(() => {
         var precio = parseFloat(valor * 3.46).toFixed(2);
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = "->"+valor+" Kg de pechuga de pollo = "+precio+"€\n";
+        var nuevo = ""+valor+" Kg de pechuga de pollo = "+precio+"€\n";
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
@@ -246,7 +267,7 @@ $(document).ready(() => {
         var precio = parseFloat(valor * 11.26).toFixed(2);
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = " + "+valor+" Kg de gambas frescas = "+TOTAL+"€";
+        var nuevo = " "+valor+" Kg de gambas frescas = "+TOTAL+"€";
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
@@ -277,7 +298,7 @@ $(document).ready(() => {
         var precio = parseFloat(valor * 3.77).toFixed(2);
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = " + "+valor+" Kg de piña = "+TOTAL;
+        var nuevo = "  "+valor+" Kg de piña = "+TOTAL;
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });

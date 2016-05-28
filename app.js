@@ -5,6 +5,7 @@ const app = express();
 const path = require('path');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -13,6 +14,8 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: false }));//body
 
 //calculate o hace falta llamarlo con el .js .
 //const calculate = require('./models/calculate.js');
@@ -84,6 +87,7 @@ app.get('/inicio/superprincipal', function(req, res) {
 
 //Creacion de usuarios en BDD mongo
 app.get('/new_user', (request, response) => {//midelware para la creacion de un usuario a la bdd
+    console.log("Entramos en new user");
     let name_user = request.query.name;
     let pass = request.query.contrasenia;
     let correo = request.query.correo;
@@ -101,6 +105,7 @@ app.get('/new_user', (request, response) => {//midelware para la creacion de un 
         if(err) return console.log(err);
     console.log(`Saved en /new_user: ${usuario_app}`);
     });
+    response.render('error',{title:"LLEGAMO AQIII"});
 
 });
 
@@ -203,48 +208,88 @@ app.get('/buscar/:usuario/:contrasenia/:correo',function(request,response,next){
 
 //Opcion de boton inicio de sesion, busca en la bdd y sino lo crea
 //!!!!app.post pero no renderiza!!!!!!!
-app.get('/sesion/:usuario/:contrasenia',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
-    console.log("Midelware Buscamos usuario ->"+request.user);
+// app.get('/sesion/:usuario/:contrasenia',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
+//     console.log("Midelware Buscamos usuario ->"+request.user);
     
-    console.log("Midelware Buscamos password ->"+request.contrasenia);
-     mongodb.User.find({name: request.user, contrasenia: request.contrasenia},function(err,docs){
+//     console.log("Midelware Buscamos password ->"+request.contrasenia);
+//      mongodb.User.find({name: request.user, contrasenia: request.contrasenia},function(err,docs){
          
+//           if(docs.length > 0){
+//         //         //console.log("Error:"+err);
+//         //         console.log("Id de usuario:"+docs[0]._id);
+//         //         /*var id = new ObjectId(data[0]._id);
+//         //         console.log("Id:"+id._id);*/
+//         //         const id = mongoose.Types.ObjectId(docs[0]._id);
+//         //         console.log("Id:"+id);
+//         //         console.log("NAME: "+docs[0].name);
+//         //         console.log("FIND: "+ mongodb.Acumulador.find({_creator: id}));
+//         //         mongodb.Acumulador.find({_creator: id},function(err,docs_acum){//BUsca en acumulador y devuelve lo relacionado a ID
+//         //             if(err) {
+//         //                 console.error("Se ha producido un error->"+err);
+//         //             } else {
+//         //                 console.log("EL USUARIO EXISTE EN LA BDD")
+//         //                 console.log("ACUMULADOR: "+docs_acum.acu);
+//         //                 console.log("Buscamos por la ID del usuario: "+docs[0].name+"  Acumulador:"+docs_acum);    
+//         //             }
+//                      //response.send({contenido: docs[0].name, usuario_propietario: id,todo:docs_acum});
+//                      //console.alert("Usuario ya existente"); 
+//                      //response.send(docs);
+//                     response.render('super_principal',{/*name: docs[0].name, usuario_propietario: id,*/title:"Bienvenido a su SUPER APP"});
+                
+//           }else{
+//               //response.send({contenido: docs, usuario_propietario: id});
+//               console.log("El usuario no se encuentra en la BDD");
+//               response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
+//           }
+//      });
+//           //response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
+//           //next();
+//           //response.send(docs);
+//           // response.send({contenido: docs, usuario_propietario: docs[0]._id,name:docs[0].name});
+//      //});
+//      response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
+// });
+
+
+
+//PRUEBA**********************************
+
+app.get('/sesion',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
+    console.log("NOMBRE EN SESION: "+request.query.name);
+    console.log("CONTRASEÑA EN SESION: "+request.query.contrasenia);
+    
+      if(mongodb.User.find({contrasenia: request.query.contrasenia},function(err,docs){
+         console.log("BUScamos en la BDD de userS, tamanio del documento"+docs.length);
+         console.log("VALOR DE DOCS"+docs[0]);
+          
            if(docs.length > 0){
-                //console.log("Error:"+err);
-                console.log("Id de usuario:"+docs[0]._id);
-                /*var id = new ObjectId(data[0]._id);
-                console.log("Id:"+id._id);*/
-                const id = mongoose.Types.ObjectId(docs[0]._id);
-                console.log("Id:"+id);
-                console.log("NAME: "+docs[0].name);
-                console.log("FIND: "+ mongodb.Acumulador.find({_creator: id}));
-                mongodb.Acumulador.find({_creator: id},function(err,docs_acum){//BUsca en acumulador y devuelve lo relacionado a ID
-                    if(err) {
-                        console.error("Se ha producido un error->"+err);
-                    } else {
-                        console.log("EL USUARIO EXISTE EN LA BDD")
-                        console.log("ACUMULADOR: "+docs_acum.acu);
-                        console.log("Buscamos por la ID del usuario: "+docs[0].name+"  Acumulador:"+docs_acum);    
-                    }
-                     //response.send({contenido: docs[0].name, usuario_propietario: id,todo:docs_acum});
-                     //console.alert("Usuario ya existente"); 
-                     //response.send(docs);
-                    response.render('super_principal',{name: docs[0].name, usuario_propietario: id,title:"Bienvenido a su SUPER APP"});
-                });
+               
+               console.log("Entro en el documento a buscar");
+                    response.render('super_principal',{title:"Bienvenido a su SUPERonline"});
+                
            }else{
                //response.send({contenido: docs, usuario_propietario: id});
                console.log("El usuario no se encuentra en la BDD");
                response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
            }
-           //response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
-           //next();
-           //response.send(docs);
-          // response.send({contenido: docs, usuario_propietario: docs[0]._id,name:docs[0].name});
-     });
-     //response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
+     }));
+    
+
+});
+
+//FACTURA PRUEBA
+
+app.get('/generar',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
+    console.log("VALOR DE FACTURA EN GENRAR: "+request.query.factura);
+    response.send({factura:request.query.factura});
+    
+
 });
 
 
+
+
+//******************************************
 
 /*****************************************
 app.get('/sesion',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user   
