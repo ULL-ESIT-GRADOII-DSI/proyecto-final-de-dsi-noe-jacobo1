@@ -166,10 +166,19 @@ $(document).ready(() => {
         console.log("\n\n Mostrando valor de registrarse: "+correo.value+"\n");
         console.log("\n\n Mostrando valor de registrarse: "+contrasenia.value+"\n");
         
-        $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
-        { name: $("nombre_usuario").val(),
-            correo: $("correo").val(),
-            contrasenia: $("contrasenia").val(),
+    //     $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
+    //     { name: $("nombre_usuario").val(),
+    //         correo: $("correo").val(),
+    //         contrasenia: $("contrasenia").val(),
+    //     },
+    //     botones_ejemplos,
+    //     'json'
+    //   );
+    
+        $.get('/buscar',
+        { name: nombre_usuario.value,
+            correo: correo.value,
+            contrasenia: contrasenia.value
         },
         botones_ejemplos,
         'json'
