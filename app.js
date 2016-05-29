@@ -258,45 +258,34 @@ app.get('/sesion',function(request,response,next){//Para llegar aqi primero tien
     console.log("NOMBRE EN SESION: "+request.query.name);
     console.log("CONTRASEÑA EN SESION: "+request.query.contrasenia);
     
-      if(mongodb.User.find({contrasenia: request.query.contrasenia},function(err,docs){
+      mongodb.User.find({contrasenia: request.query.contrasenia},function(err,docs){
          console.log("BUScamos en la BDD de userS, tamanio del documento"+docs.length);
-         console.log("VALOR DE DOCS"+docs[0]);
           
            if(docs.length > 0){
                
                console.log("Entro en el documento a buscar");
-                    response.render('super_principal',{title:"Bienvenido a su SUPERonline"});
+                    response.render('super_principal',{title:"Bienvenido a su SUPERonline",name:'request.query.name'});
                 
            }else{
                //response.send({contenido: docs, usuario_propietario: id});
                console.log("El usuario no se encuentra en la BDD");
                response.render('error', {title:"ERROR NO EXISTE EN LA BDD"});
            }
-     }));
+     });
     
 
 });
 
-//FACTURA PRUEBA
+//FACTURA PRUEBA donde guardamos la factura en la BDD y la enviamos para crear el template
 
-app.get('/generar',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
-    console.log("VALOR DE FACTURA EN GENRAR: "+request.query.factura);
-    response.send({factura:request.query.factura});
+app.get('/generar/:usuario',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
+    console.log("request user"+request.user);
+    console.log("VALOR DE FACTURA EN GENERAR: "+request.query.factura);
+    console.log("TOTAL DE LA FACTURA"+request.query.total);
     
-
-});
-
-
-//Registrase
-
-app.get('/buscar',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
-    
-    console.log("Midelware Buscamos usuario ->"+request.query.name);
-    console.log("Midelware Buscamos cprreo ->"+request.query.correo);
-    console.log("Midelware Buscamos password ->"+request.query.contrasenia);
-     mongodb.User.find({name: request.query.name},function(err,docs){
-         
-          if(docs.length > 0){
+    mongodb.User.find({name: request.user},function(err,docs){
+        console.log("longitud devuelta"+docs.length);
+         if(docs.length > 0){
                 //console.log("Error:"+err);
                 console.log("Id de usuario:"+docs[0]._id);
                 /*var id = new ObjectId(data[0]._id);
@@ -304,41 +293,115 @@ app.get('/buscar',function(request,response,next){//Para llegar aqi primero tien
                 const id = mongoose.Types.ObjectId(docs[0]._id);
                 console.log("Id:"+id);
                 console.log("NAME: "+docs[0].name);
+                console.log("correo: "+docs[0].correo);
+                console.log("password: "+docs[0].contrasenia);
                 console.log("FIND: "+ mongodb.Acumulador.find({_creator: id}));
-                mongodb.Acumulador.find({_creator: id},function(err,docs_acum){//BUsca en acumulador y devuelve lo relacionado a ID
-                    if(err) {
-                        console.error("Se ha producido un error->"+err);
-                    } else {
-                        console.log("EL USUARIO EXISTE EN LA BDD")
-                        console.log("ACUMULADOR: "+docs_acum.acu);
-                        console.log("Buscamos por la ID del usuario: "+docs[0].name+"  Acumulador:"+docs_acum);    
-                    }
-                     //response.send({contenido: docs[0].name, usuario_propietario: id,todo:docs_acum});
-                     //console.alert("Usuario ya existente");
-                     //response.send(docs);
-                    response.render('super_principal',{name: docs[0].name, usuario_propietario: id,title: "SUPER APP"});
+                mongodb.Acumulador.find({_creator: id},function(err,docs_a){
+                    console.log("Dentro de acumulador de facturas: " + docs_a.length);
+                    let nueva_factura = new mongodb.Acumulador({
+                            factura: request.query.factura,
+                            _creator: id
+                    });
+                    //Guardamos tabla en BD
+                    nueva_factura.save(function(err){
+                           if(err) return console.log(err); 
+                           console.log(`Guardada nueva factura: ${nueva_factura}`+`ID del creador ${nueva_factura._creator}`);
+                    });
                 });
-          }else{
+                response.send({name:request.user,factura:request.query.factura,total: request.query.total});
+         }else{
+             //El usuario no existe;
+             console.log("El usuario no existe");
+             response.send({error:"El usuario introducido no es correcto"});
+         }
+        
+    });
     
-              let usuario_app = new mongodb.User({
+    //response.send({name:request.user,factura:request.query.factura,total: request.query.total});
+    
+
+});
+
+
+//Registrarse
+
+app.get('/buscar',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
+    
+    console.log("Midelware Buscamos usuario ->"+request.query.name);
+    console.log("Midelware Buscamos cprreo ->"+request.query.correo);
+    console.log("Midelware Buscamos password ->"+request.query.contrasenia);
+     mongodb.User.find({name:request.query.name,contrasenia: request.query.contrasenia},function(err,docs){
+         console.log("BUScamos en la BDD de userS, tamanio del documento"+docs.length);
+          
+           if(docs.length > 0){
+               
+               console.log("Entro en el documento a buscar");
+                    
+                
+           }else{
+               //response.send({contenido: docs, usuario_propietario: id});
+               console.log("El usuario no se encuentra en la BDD");
+               let usuario_app = new mongodb.User({
                     name:request.user,
                     correo: request.correo,
                     contrasenia: request.contrasenia
                 });
                 usuario_app.save(function(err){
                 if(err) return console.log(err);
+                console.log(`Guardada nuevo usuario: ${usuario_app}`+`nombre del creador :${usuario_app.name}`);
                 console.log("Antes de enviar respuesta");
                 //response.next({contenido: " ", usuario_propietario: usuario_app._id, todo: " "});
                 //response.render('super_principal', {contenido: " ", usuario_propietario: usuario_app._id, todo: " ",title: "SUPER APP"});
-                }).then(() => {
-                console.log(`El usuario buscado no se encuentra en BDD por tanto lo creamos: ${usuario_app}`);
-                response.render('super_principal', {contenido: " ", usuario_propietario: usuario_app._id, todo: " ",title: "SUPER APP"});
                 });
-              //response.send({contenido: docs, usuario_propietario: id});
-          }
-          //response.send(docs);
-          // response.send({contenido: docs, usuario_propietario: docs[0]._id,name:docs[0].name});
+               
+               
+              response.render('super_principal',{title:"Bienvenido a su SUPERonline",name:request.query.name});
+           }
      });
+
+    //       if(docs.length > 0){
+    //             //console.log("Error:"+err);
+    //             console.log("Id de usuario:"+docs[0]._id);
+    //             /*var id = new ObjectId(data[0]._id);
+    //             console.log("Id:"+id._id);*/
+    //             const id = mongoose.Types.ObjectId(docs[0]._id);
+    //             console.log("Id:"+id);
+    //             console.log("NAME: "+docs[0].name);
+    //             console.log("FIND: "+ mongodb.Acumulador.find({_creator: id}));
+    //             mongodb.Acumulador.find({_creator: id},function(err,docs_acum){//BUsca en acumulador y devuelve lo relacionado a ID
+    //                 if(err) {
+    //                     console.error("Se ha producido un error->"+err);
+    //                 } else {
+    //                     console.log("EL USUARIO EXISTE EN LA BDD")
+    //                     console.log("ACUMULADOR: "+docs_acum.acu);
+    //                     console.log("Buscamos por la ID del usuario: "+docs[0].name+"  Acumulador:"+docs_acum);    
+    //                 }
+    //                  //response.send({contenido: docs[0].name, usuario_propietario: id,todo:docs_acum});
+    //                  //console.alert("Usuario ya existente");
+    //                  //response.send(docs);
+    //                 response.render('super_principal',{name: docs[0].name, usuario_propietario: id,title: "SUPER APP"});
+    //             });
+    //       }else{
+    
+    //           let usuario_app = new mongodb.User({
+    //                 name:request.user,
+    //                 correo: request.correo,
+    //                 contrasenia: request.contrasenia
+    //             });
+    //             usuario_app.save(function(err){
+    //             if(err) return console.log(err);
+    //             console.log("Antes de enviar respuesta");
+    //             //response.next({contenido: " ", usuario_propietario: usuario_app._id, todo: " "});
+    //             //response.render('super_principal', {contenido: " ", usuario_propietario: usuario_app._id, todo: " ",title: "SUPER APP"});
+    //             }).then(() => {
+    //             console.log(`El usuario buscado no se encuentra en BDD por tanto lo creamos: ${usuario_app}`);
+    //             response.render('super_principal', {contenido: " ", usuario_propietario: usuario_app._id, todo: " ",title: "SUPER APP"});
+    //             });
+    //           //response.send({contenido: docs, usuario_propietario: id});
+    //       }
+    //       //response.send(docs);
+    //       // response.send({contenido: docs, usuario_propietario: docs[0]._id,name:docs[0].name});
+    //  });
 });
 
 

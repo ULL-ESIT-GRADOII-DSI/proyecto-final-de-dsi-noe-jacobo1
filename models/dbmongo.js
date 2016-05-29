@@ -23,7 +23,7 @@
    
    
     let AcumuladorSchema = new Schema({
-        acu: Number,
+        factura: String,
         _creator: [{type: Schema.Types.ObjectId, ref: 'User'}]//Schema.Types.ObjectId
     });
 
@@ -49,7 +49,7 @@
                 
                 
                 let operacion_1 = new Acumulador({
-                        acu: 9,
+                        factura: '5kg de pollo, 8€, 3 KG de chuleta 6€ ',
                         _creator: usuario_prueba1._id
                 });
                     //Guardamos tabla en BD
@@ -80,7 +80,7 @@
                    console.log(`Saved: ${usuario_prueba2}`);
                     //Ejemplos por defecto
                     let operacion_2 = new Acumulador({
-                        acu: 12,
+                        factura: '5kg de platano 7€, 6 KG de tomate 6€ ',
                         _creator: usuario_prueba2._id
                     });
                     //Guardamos tabla en BD
@@ -113,7 +113,7 @@
                 
                 
                 let operacion_3 = new Acumulador({
-                        acu: 125,
+                        factura: '5kg de sardinas 12€, 3 KG de vicuda 9€ ',
                         _creator: usuario_prueba3._id
                 });
                     //Guardamos tabla en BD

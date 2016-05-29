@@ -145,14 +145,33 @@ const botones_ejemplos = (data) => {
 // `;
 
 const resultTemplate = `
-    <textarea cols="36" rows="10"><%=rows%></textarea>
+      <nav class="carrito_compra">
+      <h3>Servicio Factura</h3>
+      <h4>A nombre de: <%=name%></h4>
+      <textarea cols="36" rows="10"><%=fact%></textarea>
+      <h2>Con un importe de: <%=total%>€</h2>
+      </nav>
 `;
 
+const errorTemplate = `
+      <nav class="carrito_compra">
+      <h2><%=error%>€</h2>
+      </nav>
+`;
+
+
 const generar_factura = (data) => {
-    console.log("valor de data"+data.factura);
-     $("#prueba").html(_.template(resultTemplate, { rows: data.factura }));
-    //  $("#prueba").html(data.factura);
-    
+    console.log("Nombre: "+data.name);
+    console.log("valor de data: "+data.factura);
+    console.log("VALOR TOTAL: "+data.total);
+    console.log("VALOR error: "+data.error);
+    if(!data.error){
+     $("#prueba").html(_.template(resultTemplate, {name:data.name, fact: data.factura,total:data.total }));
+     //$("#prueba").html(_.template(errorTemplate, {error:"El usuario introducido es incorrecto"}));
+    }else{
+        $("#prueba").html(_.template(errorTemplate, {error:"El usuario introducido es incorrecto"}));
+       // $("#prueba").html(_.template(resultTemplate, {name:data.name, fact: data.factura,total:data.total }));
+    }
 } 
 
 
@@ -196,7 +215,7 @@ $(document).ready(() => {
         {   name:nombre_usuario.value,
             contrasenia:contrasenia.value
         },
-        botones_ejemplos,
+        crear_nombre,
         'json'
       );
       });
@@ -206,10 +225,15 @@ $(document).ready(() => {
       $("#generar_factura").click(() => {
          console.log("\n\n Dentro de generar factura: \n");
          console.log("Valor de textarea"+carrito.value);
+         console.log("Valor de textarea"+nombre_usuario.value);
          
         
-        $.get('/generar',
-        {   factura:carrito.value
+         
+        
+        $.get('/generar/'+$("#nombre_usuario").val(),
+        {   name:$("nombre_usuario").val(),
+            factura:carrito.value,
+            total:TOTAL
         },
         generar_factura,
         'json'
@@ -239,19 +263,19 @@ $(document).ready(() => {
  
     
     //Igual que registrarse
-     $("#buscar_usuario").click( (event) => {//este boton implementado ahora mismo como busqeda y sino pues lo crea
-      event.preventDefault();
-      console.log("CLick buscar user");
+    //  $("#buscar_usuario").click( (event) => {//este boton implementado ahora mismo como busqeda y sino pues lo crea
+    //   event.preventDefault();
+    //   console.log("CLick buscar user");
       
-        $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
-        { name: $("nombre_usuario").val(),
-            correo: $("correo").val(),
-            contrasenia: $("contrasenia").val(),
-        },
-        botones_ejemplos,
-        'json'
-      );
-    });
+    //     $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
+    //     { name: $("nombre_usuario").val(),
+    //         correo: $("correo").val(),
+    //         contrasenia: $("contrasenia").val(),
+    //     },
+    //     botones_ejemplos,
+    //     'json'
+    //   );
+    // });
     
     
   
