@@ -48,7 +48,7 @@
 const dump = (fileName) => {
  console.log("Nombre del fichero: " + fileName);
   $.get(fileName,function (data){
-    $("#screen").val(data);
+    $("#carrito").val(data);
   });
 };
 
