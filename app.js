@@ -276,6 +276,36 @@ app.get('/sesion',function(request,response,next){//Para llegar aqi primero tien
 
 });
 
+/************************
+ * 
+ * /////////////prueba_facturas/////////*/
+ 
+ app.get('/facturas',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
+    console.log("NOMBRE EN SESION: "+request.query.name);
+    console.log("CONTRASEÑA EN SESION: "+request.query.contrasenia);
+    
+      mongodb.User.find({contrasenia: request.query.contrasenia},function(err,docs){
+         console.log("estamos en facturaaaaa"+docs.length);
+          
+           if(docs.length > 0){
+               
+               console.log("Entro en el documento a buscar");
+                    response.render('super_principal',{title:"Bienvenido a su SUPERonline",name:'request.query.name'});
+                
+           }else{
+               //response.send({contenido: docs, usuario_propietario: id});
+               console.log("El usuario no se encuentra en la BDD");
+               response.render('error', {title:"El usuario actual no posee facturas"});
+           }
+     });
+    
+
+});
+ 
+ 
+ 
+ /*****************/
+
 //FACTURA PRUEBA donde guardamos la factura en la BDD y la enviamos para crear el template
 
 app.get('/generar/:usuario',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user

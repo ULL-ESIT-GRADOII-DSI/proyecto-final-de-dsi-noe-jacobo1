@@ -64,7 +64,7 @@ const handleFileSelect = (evt) => {
  console.log("READER" + reader);
  reader.onload = (e) => {
   console.log("valor e target: " +e.target.result);
-  $("#screen").val(e.target.result);
+  $("#carrito").val(e.target.result);
 
  };
  reader.readAsText(files[0])
@@ -79,7 +79,7 @@ const handleDragFileSelect = (evt) => {
     var reader = new FileReader();
     reader.onload = (e) => {
 
-      $("#screen").val(e.target.result);
+      $("#carrito").val(e.target.result);
       evt.target.style.background = "yellow";
     };
     reader.readAsText(files[0])
