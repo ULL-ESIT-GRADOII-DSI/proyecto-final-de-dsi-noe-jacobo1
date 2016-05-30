@@ -281,8 +281,8 @@ app.get('/sesion',function(request,response,next){//Para llegar aqi primero tien
  * /////////////prueba_facturas/////////*/
  
  app.get('/facturas',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
-    console.log("NOMBRE EN SESION: "+request.query.name);
-    console.log("CONTRASEÑA EN SESION: "+request.query.contrasenia);
+    console.log("NOMBRE EN SESION dentro de facturas: "+request.user);
+    console.log("CONTRASEÑA EN SESION dentro de facturas: "+request.query.contrasenia);
     
       mongodb.User.find({contrasenia: request.query.contrasenia},function(err,docs){
          console.log("estamos en facturaaaaa"+docs.length);

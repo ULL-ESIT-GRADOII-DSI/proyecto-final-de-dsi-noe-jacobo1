@@ -88,13 +88,14 @@ h1.login-title {
   height: 50px;
   padding: 0;
   font-size: 20px;
-  color: #fff;
+  color: #000;
   text-align: center;
   background: #f0776c;
-  border: 0;
+  border: 0.5px;
   border-radius: 5px;
   cursor: pointer; 
-  outline:0;
+  outline:0;    
+  border-style: solid;
 }
 
 .login-lost
@@ -152,6 +153,8 @@ h1.login-title {
 }
 /***/
 
+
+/***/
 .productos {
   /*border-style: solid;*/
   border-radius: 10px;
@@ -184,9 +187,32 @@ h1.login-title {
   top: 200px;
   float:right;
 }
+
+.carrito_compra_2 {
+  border-style: solid;
+  border-radius: 10px;
+  right: 0px;
+  width: 275px;
+  padding: 10px;
+  top: 200px;
+  border-top: 20px;
+  float:right;
+}
+
 .carrito_compra textarea{
   border-radius: 10px;
 }
+
+.carrito_fact{
+  margin-left: 170px;
+  border-style: solid;
+  border-radius: 10px;
+  padding-left: 10px;
+  width: 53%;
+  height: 200px;
+  
+}
+
 .segundo{
   /*position: fixed;
   left: 100px;

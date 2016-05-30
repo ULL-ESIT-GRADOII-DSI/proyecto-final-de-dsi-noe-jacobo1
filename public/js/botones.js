@@ -130,7 +130,7 @@ const botones_ejemplos = (data) => {
 
 
 // const resultTemplate = `
-// <div class="contenido">
+// <div class="facturas">
 //       <table class="center" id="result">
 //           <% _.each(rows, (row) => { %>
 //           <tr class="<%=row.type%>">
@@ -145,17 +145,16 @@ const botones_ejemplos = (data) => {
 // `;
 
 const resultTemplate = `
-      <nav class="carrito_compra">
-      <h3>Servicio Factura</h3>
-      <h4>A nombre de: <%=name%></h4>
-      <textarea cols="36" rows="10"><%=fact%></textarea>
-      <h2>Con un importe de: <%=total%>€</h2>
+      <nav class="carrito_fact">
+      <h3>Servicio Factura a nombre de: <%=name%></h4>
+      <textarea cols="95" rows="5"><%=fact%></textarea>
+      <h4>Con un importe de: <%=total%>€</h4>
       </nav>
 `;
 
 const errorTemplate = `
-      <nav class="carrito_compra">
-      <h2><%=error%>€</h2>
+      <nav class="carrito_fact">
+      <h2><%=error%></h2>
       </nav>
 `;
 
@@ -204,7 +203,23 @@ $(document).ready(() => {
       );
         
     });
-    
+    /*************************
+     *  probando facturas
+     * ***********************/
+        $("#facturas").click(() => {
+        
+        $.get('/facturas',
+        {   name:nombre_usuario.value,
+            contrasenia:contrasenia.value
+        },
+         crear_nombre,
+         'json'
+      );
+      });
+     
+     /**************************/
+     
+     
     //boton iniciar seesion iniciar.ejs
       
       $("#inicio").click(() => {
@@ -226,8 +241,6 @@ $(document).ready(() => {
          console.log("\n\n Dentro de generar factura: \n");
          console.log("Valor de textarea"+carrito.value);
          console.log("Valor de textarea"+nombre_usuario.value);
-         
-        
          
         
         $.get('/generar/'+$("#nombre_usuario").val(),
