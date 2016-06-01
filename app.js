@@ -248,6 +248,7 @@ app.get('/generar/:usuario',function(request,response,next){//Para llegar aqi pr
                 });
             }else{
                 console.log("El usuario no tiene facturas");
+                response.send({error:"El usuario introducido no tiene factura en la BDD"});
             }
         }
     });

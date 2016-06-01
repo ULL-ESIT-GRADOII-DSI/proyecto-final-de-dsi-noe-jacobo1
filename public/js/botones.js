@@ -127,9 +127,15 @@ const generar_factura = (data) => {
 const buscar_factura = (data) => {
     console.log("Nombre: "+data.name);
     console.log("valor de data: "+data.factura);
-    console.log("valor de data2: "+data.factura[0].factura);
+    //console.log("valor de data2: "+data.factura[0].factura);
+    console.log("VALOR error: "+data.error);
+    if(!data.error){
      $("#prueba").html(_.template(buscfactTemplate, {it:data.factura,name:data.name, fact: data.factura[0].factura }));
-     
+    }else{
+        $("#prueba").html(_.template(errorTemplate, {error:data.error}));
+       // $("#prueba").html(_.template(resultTemplate, {name:data.name, fact: data.factura,total:data.total }));
+    }
+    
 } 
 
 
