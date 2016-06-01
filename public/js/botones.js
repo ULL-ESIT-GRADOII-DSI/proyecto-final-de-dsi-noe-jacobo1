@@ -3,20 +3,6 @@
 
     
 
-// /* Volcar la tabla con el resultado en el HTML */
-    const Datos = (data) => {
-    //console.log("dato de datos "+ data);
-    console.log("valor en funcion datos"+data.valor);
-    $("#screen").html(data.valor);//Introducimos el valor en la pantalla
-    //-----------------------------------------------------------------------------------------
-    console.log("valor depsues de asignar"+screen.value);
-  
-    acu: $("#screen").val()
-};
-
-
-
-
 /* Volcar en la textarea de entrada
  * #original el contenido del fichero fileName */
 const dump = (fileName) => {
@@ -65,22 +51,14 @@ const handleDragOver = (evt) => {
   evt.target.style.background = "green";
 }
 
-const botonesTemplate =  `
-<div class="example">
-  <% _.each(buttons, (button) => { %>
-  <button class="example" type="button" style="width:20%" style="background-color: #87CEEB;"><%= button.nombre %></button>
-  <% }); %>
-</div>
-`;
+
 
 
 const textTemplate =  ` <% _.each(values, (value) => { %>
   <textarea class="prueba" type="button" style="width:20%" style="background-color: #87CEEB;"><%= value %><%= usuario_propietario %><%=todo%></textarea>
   <% }); %>`;
 
-const botontemplate = ` <% _.each(values, (value) => { %>
-  <button class="prueba" type="button" style="width:20%" style="background-color: #87CEEB;"><%= value %><%= usuario_propietario %><%=todo%></button>
-  <% }); %>`
+
 
 const botones_ejemplos = (data) => {
   //let user_actual = data.name;
@@ -103,20 +81,6 @@ const botones_ejemplos = (data) => {
 }
 
 
-// const resultTemplate = `
-// <div class="facturas">
-//       <table class="center" id="result">
-//           <% _.each(rows, (row) => { %>
-//           <tr class="<%=row.type%>">
-//               <% _.each(row.items, (name) =>{ %>
-//               <td><%= name %></td>
-//               <% }); %>
-//           </tr>
-//           <% }); %>
-//       </table>
-//   </p>
-// </div>
-// `;
 
 const resultTemplate = `
       <nav class="carrito_fact">
@@ -232,20 +196,7 @@ $(document).ready(() => {
         
     });
     
-         /*************************
-     *  probando facturas
-     * ***********************/
-        $("#facturas").click(() => {
-                $.get('/facturas',
-                {   name:nombre_usuario.value,
-                    contrasenia:contrasenia.value
-                },
-                 crear_nombre,
-                 'json'
-              );
-      });
-     
-     /**************************/
+
       
 //********************************Botones para generar facturas ejemplos*****************************      
       //Nuevos botones ejemplos de charcuteria con class login-button
@@ -277,7 +228,7 @@ $('button.login-buttonc').each( (_,y) => {
     $('button.example').each( (_,y) => {
      $(y).click( (evt) => { 
          dump(`${$(y).text()}.txt`); 
-      evt.target.style.background = "green";
+      evt.target.style.background = "yellow";
      });
   });
 //*************************************************************    

@@ -13,5 +13,11 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "ejs": "^1.0.0",
+    "gulp": "^3.9.1",
+    "mongoose": "^4.4.19",
+    "underscore": "^1.8.3"
+  }
 }
