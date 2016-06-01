@@ -134,11 +134,13 @@ const errorTemplate = `
 
 const buscfactTemplate = `
      
-     
-      <h3>Servicio Factura a nombre de: <%=name%></h4>
+      <%var i = 1%>
+      <h3> Facturas a nombre de: <%=name%></h4>
       <% _.each(it, (fact) => { %>
-       <nav class="carrito_fact">
+      <h4>Factura numero: <%=i%><h4>
+      <nav class="carrito_fact">
       <textarea cols="95" rows="5"><%=fact.factura%></textarea>
+      <%++i%>
       </nav>
       <%});%>
       
@@ -247,12 +249,29 @@ $(document).ready(() => {
       
 //********************************Botones para generar facturas ejemplos*****************************      
       //Nuevos botones ejemplos de charcuteria con class login-button
-      $('button.login-button').each( (_,y) => {
+$('button.login-buttonc').each( (_,y) => {
      $(y).click( (evt) => { 
          dump(`${$(y).text()}.txt`); 
-      evt.target.style.background = "pink";
+      evt.target.style.background = "red";
      });
   });
+  
+  //botones fruteria
+  $('button.login-buttonf').each( (_,y) => {
+     $(y).click( (evt) => { 
+         dump(`${$(y).text()}.txt`); 
+      evt.target.style.background = "green";
+     });
+  });
+  //botones pescaderia
+  $('button.login-buttonp').each( (_,y) => {
+     $(y).click( (evt) => { 
+         dump(`${$(y).text()}.txt`); 
+      evt.target.style.background = "blue";
+     });
+  });
+  
+  
       
         //cargamos ejemplos input.txt(Calculadora) con class example
     $('button.example').each( (_,y) => {
@@ -328,7 +347,7 @@ $(document).ready(() => {
     });
     $("p2").click(() => {
         var valor = parseFloat(document.getElementById("i2").value);
-        var precio = parseFloat(valor).toFixed(2) * 9.55;
+        var precio = parseFloat(valor * 9.55).toFixed(2);
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
         var nuevo = " + "+valor+" Kg de pulpo gallego = "+TOTAL+"€";
@@ -359,7 +378,7 @@ $(document).ready(() => {
     });
     $("f2").click(() => {
         var valor = parseFloat(document.getElementById("i2").value);
-        var precio = parseFloat(valor).toFixed(2) * 1.85;
+        var precio = parseFloat(valor * 1.85).toFixed(2) ;
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
         var nuevo = " + "+valor+" Kg de manzana golden = "+TOTAL;
