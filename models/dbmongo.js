@@ -4,7 +4,7 @@
   const util = require('util');
   const mongoose = require('mongoose');
 
-  mongoose.connect('mongodb://localhost/calcula', function(err, res) {  
+  mongoose.connect('mongodb://localhost/calcula', function(err) {  
       if(err) {
           console.log('ERROR: connecting to Database. ' + err);
       }else{
@@ -26,6 +26,7 @@
    
     let AcumuladorSchema = new Schema({
         factura: String,
+        total: Number,
         _creator: [{type: Schema.Types.ObjectId, ref: 'User'}]//Schema.Types.ObjectId
     });
 
@@ -52,6 +53,7 @@
                 
                 let operacion_1 = new Acumulador({
                         factura: '5kg de pollo, 8€, 3 KG de chuleta 6€ ',
+                        total:14,
                         _creator: usuario_prueba1._id
                 });
                     //Guardamos tabla en BD
@@ -60,7 +62,7 @@
                        //console.log(`Saved: ${operacion_1}`);
                 }).then(()=>{
                         Acumulador
-                        .findOne({acu:9})
+                        .findOne({factura:9})
                         .populate('_creator')
                         .exec(function(err,docs){
                             if(err) return console.log(err);
@@ -83,6 +85,7 @@
                     //Ejemplos por defecto
                     let operacion_2 = new Acumulador({
                         factura: '5kg de platano 7€, 6 KG de tomate 6€ ',
+                        total: 13,
                         _creator: usuario_prueba2._id
                     });
                     //Guardamos tabla en BD
@@ -91,7 +94,7 @@
                        //console.log(`Saved: ${operacion_2}`);
                     }).then(()=>{
                         Acumulador
-                        .findOne({acu:'12'})
+                        .findOne({factura:'12'})
                         .populate('_creator','name')
                         .exec(function(err,docs){
                             if(err) return console.log(err);
@@ -116,6 +119,7 @@
                 
                 let operacion_3 = new Acumulador({
                         factura: '5kg de sardinas 12€, 3 KG de vicuda 9€ ',
+                        total: 21,
                         _creator: usuario_prueba3._id
                 });
                     //Guardamos tabla en BD

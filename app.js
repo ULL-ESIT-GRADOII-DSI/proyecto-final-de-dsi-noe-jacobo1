@@ -60,7 +60,7 @@ app.get('/pescaderia', function(req, res, next){
 
 //renderiza la pagina fruteria
 app.get('/charcuteria', function(req, res, next){
-      res.render('charcuteria', {title: "Charcuteria APP", error:""});
+      res.render('charcuteria', {title: "Carniceria APP", error:""});
 });
 
 //Operacion de la calculadora
@@ -131,12 +131,12 @@ app.get('/sesion',function(request,response,next){//Para llegar aqi primero tien
            if(docs.length > 0){
                
                console.log("Entro en el documento a buscar");
-                    response.render('super_principal',{title:"Bienvenido a su SUPERonline",name:'request.query.name'});
+                    response.render('super_principal',{title:"Bienvenido a su SUPERonline",name:request.query.name});
                 
            }else{
                //response.send({contenido: docs, usuario_propietario: id});
                console.log("El usuario no se encuentra en la BDD");
-               response.render('error', {title:"ERROR NO EXISTE EN LA BDD",name:request.query.name});
+               response.render('error', {title:"ERROR NO EXISTE EN LA BDD",name: request.query.name});
            }
      });
     
@@ -204,6 +204,7 @@ app.get('/generar/:usuario',function(request,response,next){//Para llegar aqi pr
                     console.log("Dentro de acumulador de facturas: " + docs_a.length);
                     let nueva_factura = new mongodb.Acumulador({
                             factura: request.query.factura,
+                            total: request.query.total,
                             _creator: id
                     });
                     //Guardamos tabla en BD
@@ -226,7 +227,7 @@ app.get('/generar/:usuario',function(request,response,next){//Para llegar aqi pr
 
 });
 
-/////////////buscar_facturas/////////*/
+/////////////buscar_facturas ///todas las facturas//////*/
  
  app.get('/factura/:usuario',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
     console.log("NOMBRE EN buscar factura dentro de facturas: "+request.user);

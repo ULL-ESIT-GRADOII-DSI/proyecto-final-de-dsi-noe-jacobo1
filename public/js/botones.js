@@ -53,31 +53,9 @@ const handleDragOver = (evt) => {
 
 
 
-
-const textTemplate =  ` <% _.each(values, (value) => { %>
-  <textarea class="prueba" type="button" style="width:20%" style="background-color: #87CEEB;"><%= value %><%= usuario_propietario %><%=todo%></textarea>
-  <% }); %>`;
-
-
-
-const botones_ejemplos = (data) => {
-  //let user_actual = data.name;
-  //console.log("Valor de data en botones ejemplo:"+user_actual);
-  //console.log("Valor de data:"+data[0].name);
-  console.log("LLegamos a la creacion de ejemplo");
-  
-  console.log("name: "+data.contenido);
-  console.log("ID: "+data.usuario_propietario);
-  console.log("TODO: "+data.todo);
-  
- 
-  //$("#area").html("TODO: "+data.todo+" ID: "+data.usuario_propietario+" nombre: "+data.contenido);//Introducimos el valor en la pantalla
-    
-    $("#prueba").html(_.template(textTemplate, { values: data.contenido, usuario_propietario: data.usuario_propietario, todo:data.todo}));//textarea
-    //$("#prueba").html(_.template(botontemplate, { values: data.contenido, usuario_propietario: data.usuario_propietario, todo:data.todo}));//botones
-  //$("#botones").html(_.template(botonesTemplate, { buttons: data.contenido, usuario_propietario: data.usuario_propietario}));
-
-
+const Datos = (data) => {
+    console.log("valor: "+data.valor);
+    $("carrito").html(data.valor);
 }
 
 
@@ -99,18 +77,19 @@ const errorTemplate = `
 const buscfactTemplate = `
      
       <%var i = 1%>
-      <h3> Facturas a nombre de: <%=name%></h4>
       <% _.each(it, (fact) => { %>
-      <h4>Factura numero: <%=i%><h4>
+      
       <nav class="carrito_fact">
+      <h4>Factura numero : <%=i%>  ,Correspondiente a: <%=name%></h4>
       <textarea cols="95" rows="5"><%=fact.factura%></textarea>
+      
       <%++i%>
       </nav>
       <%});%>
       
 `;
 
-
+// generar factura (1)
 const generar_factura = (data) => {
     console.log("Nombre: "+data.name);
     console.log("valor de data: "+data.factura);
@@ -124,13 +103,15 @@ const generar_factura = (data) => {
        // $("#prueba").html(_.template(resultTemplate, {name:data.name, fact: data.factura,total:data.total }));
     }
 }
+
+//ver facturas(todas)
 const buscar_factura = (data) => {
     console.log("Nombre: "+data.name);
     console.log("valor de data: "+data.factura);
-    //console.log("valor de data2: "+data.factura[0].factura);
+    console.log("valor de data2: "+data.factura[0].total);
     console.log("VALOR error: "+data.error);
     if(!data.error){
-     $("#prueba").html(_.template(buscfactTemplate, {it:data.factura,name:data.name, fact: data.factura[0].factura }));
+     $("#prueba").html(_.template(buscfactTemplate, {it:data.factura,name:data.name, fact: data.factura[0].factura,total :data.factura[0].total }));
     }else{
         $("#prueba").html(_.template(errorTemplate, {error:data.error}));
        // $("#prueba").html(_.template(resultTemplate, {name:data.name, fact: data.factura,total:data.total }));
@@ -242,9 +223,9 @@ $('button.login-buttonc').each( (_,y) => {
 //*************************** Calculadora**********************************    
    
     $("#igual").click( () => {
-        console.log("\n\n Mostrando screen dentro de igual: "+screen.value+"\n\n");
+        console.log("\n\n Mostrando screen dentro de igual: "+carrito.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
-          { input: screen.value },
+          { input: carrito.value },
            Datos,//funcion que pasamos para guardar nuestro dato(mas arriba declarada)
           'json'
         );
@@ -303,12 +284,12 @@ $('button.login-buttonc').each( (_,y) => {
         $("#carrito").val(ALL_TEXT);
     });
     $("p2").click(() => {
+        
         var valor = parseFloat(document.getElementById("i2").value);
-        var precio = parseFloat(valor * 9.55).toFixed(2);
+        var precio = parseFloat(valor * 9.55).toFixed(2) ;
         
         TOTAL = (parseFloat(TOTAL) + parseFloat(precio)).toFixed(2);
-        var nuevo = " + "+valor+" Kg de pulpo gallego = "+TOTAL+"€";
-        console.log("valor de total y de alltext: "+TOTAL+ALL_TEXT+"€");
+        var nuevo = " + "+valor+" Kg de pulpo a la gallega = "+TOTAL+"€" ;
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
