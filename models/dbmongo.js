@@ -18,7 +18,7 @@
   let UserSchema = new Schema({
          name: String,
          correo: String,
-         contrasenia:String,
+         contrasenia:String
         // _creator: [{type: Schema.Types.ObjectId, ref: 'Acumulador'}]
          
      });

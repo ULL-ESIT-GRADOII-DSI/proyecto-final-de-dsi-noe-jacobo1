@@ -33,12 +33,3 @@ gulp.task('default', function() {
     .pipe(gulp.dest('./public/js'));
 });*/
 
- 
-gulp.task('browserify', function() {
-    return browserify('./app.js')
-        .bundle()
-        //Pass desired output filename to vinyl-source-stream
-        .pipe(source('bundle.js'))
-        // Start piping stream to tasks!
-        .pipe(gulp.dest('./build/'));
-});

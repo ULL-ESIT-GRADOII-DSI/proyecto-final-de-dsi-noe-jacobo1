@@ -40,7 +40,7 @@
             <td>Chuleta de cerdo</td>
             <td>2,55 €/Kg</td>
             <td><input type="text" name=i2 id="i2"></td>
-            <td><a class="enlace_boton" href="#" id="c2" name="c2" >Añadir</a></td>
+            <td><a class="enlace_boton" href="#" id="c2" name="c2" pattern="^\d*([-+]?\d+(?:\.\d+)?\d*$" title="Introduzca numeros">Añadir</a></td>
           </tr>
           <tr>
             <td>Carne mechada res</td>
@@ -63,17 +63,19 @@
        <div class="example">
             Introduzca su nombre :<textarea id="nombre_usuario" name="nombre_usuario" placeholder="Name" aria-required="true"></textarea>
       <input id="generar_factura" name="generar_factura" type="submit" value="Generar factura" class="login-button">
-           <th>
-              Cargar facturas en el textarea:
-              <input type="file" class="inputfile" />
-          </th>
+      <input id="buscar_factura" name="buscar_factura" type="submit" value="Buscar factura" class="login-button">
+           <br><br>
            <div class="examples">
               Click para cargar facturas ejemplos:
               <button class ="login-button" type="button" id="input">factura_charcuteria1</button>
               <button class ="login-button" type="button" id="input2">op2</button>
               <button class ="login-button" type="button" id="input3">op3</button>
               <!--button class ="example" type="button">input4</button-->
-    </div>
+          </div><br>
+          <th>
+              Cargar facturas en el textarea:
+              <input type="file" class="inputfile"/>
+          </th>
     </nav>
     
   </nav><br><br>

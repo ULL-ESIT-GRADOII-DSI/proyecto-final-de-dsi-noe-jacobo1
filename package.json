@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-     "test": "node app.js",
-     "start": "node app.js",
+    "test": "node app.js",
+    "start": "node app.js",
     "view": "open http://localhost:5000/"
   },
   "repository": {

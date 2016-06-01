@@ -1,32 +1,6 @@
 (() => {
 "use strict"; // Use ECMAScript 5 strict mode in browsers that support it
 
-   
-    /***************** IMPORTANTE *****************************/
-    // Para trabajar con la ocultacion de divs y eso
-    // necesitamos incluir de alguna manera las partes
-    // del html con las que trabajar.
-    // En el ejemplo de mongose se declara arriba lo siguiente 
-    
-    //     const resultTemplate = `
-    // <div class="pantalla">
-    //       <textarea class="drop_zone" id="result">
-    //           <% _.each(rows, (row) => { %>
-    //           <tr class="<%=row.type%>">
-    //               <% _.each(row.items, (name) =>{ %>
-    //               <td><%= name %></td>
-    //               <% }); %>
-    //           </tr>
-    //           <% }); %>
-    //       </textarea>
-    //   </p>
-    // </div>
-    // `;
-    //<textarea class = "drop_zone" cols = "74" rows = "5" id="screen" name="screen">0</textarea>
-    
-    // Creo que gracias a esto podemos trabajar con "contenido" en
-    // ese caso y con result. Pienso que igual necesitamos algo similar,
-    // sin tabla, sino que adecuado a nuestro html, pero no lo sé seguro.
     
 
 // /* Volcar la tabla con el resultado en el HTML */
@@ -158,6 +132,18 @@ const errorTemplate = `
       </nav>
 `;
 
+const buscfactTemplate = `
+     
+     
+      <h3>Servicio Factura a nombre de: <%=name%></h4>
+      <% _.each(it, (fact) => { %>
+       <nav class="carrito_fact">
+      <textarea cols="95" rows="5"><%=fact.factura%></textarea>
+      </nav>
+      <%});%>
+      
+`;
+
 
 const generar_factura = (data) => {
     console.log("Nombre: "+data.name);
@@ -171,54 +157,32 @@ const generar_factura = (data) => {
         $("#prueba").html(_.template(errorTemplate, {error:"El usuario introducido es incorrecto"}));
        // $("#prueba").html(_.template(resultTemplate, {name:data.name, fact: data.factura,total:data.total }));
     }
+}
+const buscar_factura = (data) => {
+    console.log("Nombre: "+data.name);
+    console.log("valor de data: "+data.factura);
+    console.log("valor de data2: "+data.factura[0].factura);
+     $("#prueba").html(_.template(buscfactTemplate, {it:data.factura,name:data.name, fact: data.factura[0].factura }));
+     
 } 
 
 
 $(document).ready(() => {
-    let screen = document.getElementById("screen");
+    
     
     //boton registrarse registro.ejs
-    $("#registrarse").click( () => {
+    $("#registro").click(() => {
+         console.log("\n\n Mostrando valor de iniciar registro user: "+nombre_user.value+"\n");
+         console.log("\n\n Mostrando valor de iniciar registro password: "+coreo.value+"\n");
+         console.log("\n\n Mostrando valor de iniciar registro password: "+contra.value+"\n");
         
-        console.log("\n\n Mostrando valor de registrarse: "+nombre_usuario.value+"\n");
-        console.log("\n\n Mostrando valor de registrarse: "+correo.value+"\n");
-        console.log("\n\n Mostrando valor de registrarse: "+contrasenia.value+"\n");
-        
-    //     $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
-    //     { name: $("nombre_usuario").val(),
-    //         correo: $("correo").val(),
-    //         contrasenia: $("contrasenia").val(),
-    //     },
-    //     botones_ejemplos,
-    //     'json'
-    //   );
-    
-        $.get('/buscar',
-        { name: nombre_usuario.value,
-            correo: correo.value,
-            contrasenia: contrasenia.value
-        },
-        botones_ejemplos,
-        'json'
-      );
-        
-    });
-    /*************************
-     *  probando facturas
-     * ***********************/
-        $("#facturas").click(() => {
-        
-        $.get('/facturas',
-        {   name:nombre_usuario.value,
-            contrasenia:contrasenia.value
-        },
-         crear_nombre,
-         'json'
-      );
+        $.get('/newuser',
+        {   name:nombre_user.value,
+            correo:coreo.value,
+            contrasenia:contra.value
+        });
       });
-     
-     /**************************/
-     
+ 
      
     //boton iniciar seesion iniciar.ejs
       
@@ -230,7 +194,6 @@ $(document).ready(() => {
         {   name:nombre_usuario.value,
             contrasenia:contrasenia.value
         },
-        crear_nombre,
         'json'
       );
       });
@@ -253,16 +216,55 @@ $(document).ready(() => {
       );
         
     });
+    //buscar factura 
+    $("#buscar_factura").click(() => {
+         console.log("\n\n Dentro de buscar factura: \n");
+         console.log("Valor de textarea: "+nombre_usuario.value);
+         
+        
+        $.get('/factura/'+$("#nombre_usuario").val(),
+        {   name:$("nombre_usuario").val() },
+        buscar_factura,
+        'json'
+      );
+        
+    });
     
-        //cargamos ejemplos input.txt(Calculadora)
+         /*************************
+     *  probando facturas
+     * ***********************/
+        $("#facturas").click(() => {
+                $.get('/facturas',
+                {   name:nombre_usuario.value,
+                    contrasenia:contrasenia.value
+                },
+                 crear_nombre,
+                 'json'
+              );
+      });
+     
+     /**************************/
+      
+//********************************Botones para generar facturas ejemplos*****************************      
+      //Nuevos botones ejemplos de charcuteria con class login-button
+      $('button.login-button').each( (_,y) => {
+     $(y).click( (evt) => { 
+         dump(`${$(y).text()}.txt`); 
+      evt.target.style.background = "pink";
+     });
+  });
+      
+        //cargamos ejemplos input.txt(Calculadora) con class example
     $('button.example').each( (_,y) => {
      $(y).click( (evt) => { 
          dump(`${$(y).text()}.txt`); 
       evt.target.style.background = "green";
      });
   });
-    
-    //(Calculadora)
+//*************************************************************    
+
+//*************************** Calculadora**********************************    
+   
     $("#igual").click( () => {
         console.log("\n\n Mostrando screen dentro de igual: "+screen.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
@@ -275,26 +277,11 @@ $(document).ready(() => {
     
  
     
-    //Igual que registrarse
-    //  $("#buscar_usuario").click( (event) => {//este boton implementado ahora mismo como busqeda y sino pues lo crea
-    //   event.preventDefault();
-    //   console.log("CLick buscar user");
-      
-    //     $.get('/buscar/'+$("#nombre_usuario").val()+'/'+$("#contrasenia").val()+'/'+$("#correo").val(),
-    //     { name: $("nombre_usuario").val(),
-    //         correo: $("correo").val(),
-    //         contrasenia: $("contrasenia").val(),
-    //     },
-    //     botones_ejemplos,
-    //     'json'
-    //   );
-    // });
-    
     
   
     
     
-    
+//*************************************************************Botoenes para pintar en el carrito **************************    
     
 
 //Botones text area diferentes modulos
@@ -389,7 +376,11 @@ $(document).ready(() => {
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
-    /************************************/
+    
+//************************************************************* 
+
+
+    /********************Drop Zone****************/
 
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];
