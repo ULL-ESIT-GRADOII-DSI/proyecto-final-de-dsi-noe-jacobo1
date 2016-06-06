@@ -3,7 +3,7 @@
 "use strict";
 
  window.onload = function(){ //Acciones tras cargar la página
- screen =document.getElementById("carrito"); //elemento pantalla de salida
+ screen =document.getElementById("screen"); //elemento pantalla de salida
  //console.log(":::"+screen);
  }
 
@@ -60,8 +60,6 @@ const numero = (digito) => {  //recoge el número pulsado en el argumento.
           console.log("AQI");   
 };
 
-
- //module.exports = numero;
  exports.numero = numero;
 })(this);
 

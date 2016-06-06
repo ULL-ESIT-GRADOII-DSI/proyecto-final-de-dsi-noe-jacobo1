@@ -141,12 +141,6 @@
                         });
                 });
               });
-            //
-                        
-                        // Intentando buscar todos los documentos de un usuario
-        
-            
-            
         });
     });
  

@@ -3,15 +3,7 @@
         <!-- Listado de Navegación -->
         <ul class="menu">
             <li><a href="./superprincipal">Inicio</a></li>
-            <li><a href="#">Quienes Somos</a></li>
-            <li><a href="#">Herramientas</a></li>
-              <ul>
-                <!-- Esto esta oculto es para un submenu para
-                la calculadora y demas -->
-                <li><a href="#">Calculadora</a></li>
-                <li><a href="#">Calendario</a></li>
-              </ul>
-            <li><a href="#">Clientes</a></li>
+            <li><a href="./info">Quienes Somos</a></li>
             <li><a href="#">Club</a></li>
         </ul>
     </nav>
@@ -20,36 +12,22 @@
 
 
 <div class="container">
-    <!--<%=title%>-->
-    <!-- Comenzando nueva parte -->
-    <div class = "registro">
-      <h1>FactOnLine</h1>
-      <p>Binevenido a su factura online.
-         Por favor, ingrese su nombre a continuación: </p>
-      <input class="nombre_usuario" type="text" autofocus id="nombre_usuario" name="nombre_usuario" placeholder="nombre">
-      <input class="nombre_usuario" type="text" autofocus id="correo" name="correo" placeholder="email">
-      <input class="nombre_usuario" type="text" autofocus id="contrasenia" name="contrasenia" placeholder="****">
-      <button class ="guardar_nombre" type="button" id="boton_nombre" name="boton_nombre">Comenzar</button>
-    </div>
     
      <div class = "cambio_usuario" id="oculto">
       <h1>CalcOnLine</h1>
       <p> Acceso correcto. Comience a trabajar con CalcOnLine</p>
-      <button class ="cambiar_nombre" type="button" id="cambiar_nombre" name="cambiar_nombre">Cambio de usuario</button>
-      <button class ="buscar_usuario" type="button" id="buscar_usuario" name="buscar_usuario">Buscar en BDD</button>
+      <!--<button class ="cambiar_nombre" type="button" id="cambiar_nombre" name="cambiar_nombre">Cambio de usuario</button>-->
+      <!--<button class ="buscar_usuario" type="button" id="buscar_usuario" name="buscar_usuario">Buscar en BDD</button>-->
     </div>
     <br><br>
     
     <!-- Finalizando nueva parte -->
    <form action="#" name="calculadora" id="calculadora">
-      <th>
-              Cargar archivo en el textarea:
-              <input type="file" class="inputfile" />
-    </th>
+ 
     
     <div class="pantalla">
-       
-       <textarea class = "drop_zone" cols = "50" rows = "5" id="carrito" name="carrito">0</textarea>
+       <!--id y name carrito-->
+       <textarea class = "drop_zone" cols = "70" rows = "5" id="screen" name="screen">0</textarea>
     
     </div>
     
@@ -90,57 +68,30 @@
       </form>
     </div>
     
-    <div class="example">
-            Area ejemplo
-            <textarea class = "area" cols = "10" rows = "3" id="area" name="area"></textarea>
-            <!--div id="area"></div-->
-    </div>
-    <br><br>
-    <div class="example">
-            Cargar ejemplo
-            <div id="prueba" class="prueba"></div>
-    </div>
-    <br><br>
-    <div class="example">
-            Cargar ejemplo
-            <div id="botones"></div>
-    </div>
+    <!--<div class="example">-->
+    <!--        Area ejemplo-->
+    <!--        <textarea class = "area" cols = "10" rows = "3" id="area" name="area"></textarea>-->
+           
+    <!--</div>-->
+    <!--<br><br>-->
+    <!--<div class="example">-->
+    <!--        Cargar ejemplo-->
+    <!--        <div id="prueba" class="prueba"></div>-->
+    <!--</div>-->
+    <!--<br><br>-->
+    <!--<div class="example">-->
+    <!--        Cargar ejemplo-->
+    <!--        <div id="botones"></div>-->
+    <!--</div>-->
     
-    <br><br>
-    <div class="examples">
-              Click para cargar ejemplos:
-              <button class ="example" type="button" id="input">op1</button>
-              <button class ="example" type="button" id="input2">op2</button>
-              <button class ="example" type="button" id="input3">op3</button>
+    <!--<br><br>-->
+    <!--<div class="examples">-->
+    <!--          Click para cargar ejemplos:-->
+    <!--          <button class ="example" type="button" id="input">op1</button>-->
+    <!--          <button class ="example" type="button" id="input2">op2</button>-->
+    <!--          <button class ="example" type="button" id="input3">op3</button>-->
               <!--button class ="example" type="button">input4</button-->
-    </div>
-   
-    <!--
-    <div></div>
-        <p>
-          <input type="button"  value="0" onclick='numero(0)' />
-          <input type="button"  value="1" onclick="numero('1')" />  
-          <input type="button"  value="2" onclick="numero('2')" />
-          <input type="button"  value="3" onclick="numero('3')" />
-          <input type="button"  value="4" onclick="numero('4')" />
-          <input type="button"  value="5" onclick="numero('5')" />
-          <input type="button"  value="6" onclick="numero('6')" />
-          <input type="button"  value="7" onclick="numero('7')" />
-          <input type="button"  value="8" onclick="numero('8')" />
-          <input type="button"  value="9" onclick="numero('9')" />
-          <input type="button"  value="+" onclick="numero('+')" />
-          <input type="button"  value="-" onclick="numero('-')" />
-          <input type="button"  value="*" onclick="numero('*')" />
-          <input type="button"  value="/" onclick="numero('/')" />
-          <input type="button"  value="=" id="igual">
-        </p>
--->
-    <!--</form>-->
+    <!--</div>-->
+  
   </div>
   
-  <!--</nav>-->
-  <!--  <nav class="categorias">-->
-      <!--a class="botones_generales" href="./charcuteria.html">Charcuteria</a>
-  <!--    <a class="botones_generales" href="./pescaderia.html">Pescaderia</a-->-->
-  <!--    <a class="botones_generales" href="./fruteria">Fruteria</a>-->
-  <!--</nav>-->

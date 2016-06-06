@@ -2,32 +2,15 @@
         <!-- Listado de Navegación -->
         <ul>
             <li><a href="/">Inicio</a></li>
-            <li><a href="#">Quienes Somos</a></li>
-            <li><a href="#">Herramientas</a></li>
-              <ul>
-                <li><a href="#">Calculadora</a></li>
-                <li><a href="#">Calendario</a></li>
-              </ul>
-            <li><a href="#">Facturas</a></li>
-            <li><a href="#">Club</a></li>
+            <li><a href="./info">Quienes Somos</a></li>
+            <li><a href="./club">Club</a></li>
         </ul>
     </nav>
     
-    
-    
-
-<!--<form class="login" action="/superprincipal" method="get" >-->
-  <!--  <form class="login" method="get" action="/newuser">-->
-  <!--  <h1 class="login-title">Registro</h1>-->
-  <!--  <input id="nombre_usuario1" type="text" class="login-input" placeholder="Nombre de Usuario" autofocus aria-required="true"/>-->
-  <!--  <input id="correo1" type="text" class="login-input" placeholder="Correo electrónico" name="email" autofocus aria-required="true"/>-->
-  <!--  <input id="contrasenia1" type="password" class="login-input" placeholder="Contraseña"aria-required="true"/>-->
-  <!--  <input id="registrarse" name="registrarse" type="submit" value="Registrese" class="login-button">-->
-    <!--a id="registrarse" href="/superprincipal" class="login-button">Registrar</a-->
 
   <!--</form>-->
 <form class="login" method="get" action="/newuser">
-    <h1 class="login-title">Registro1<%=title%></h1>
+    <h1 class="login-title"><%=title%></h1>
     
     <input id="nombre_user" name="nombre_user" type="text" class="login-input" placeholder="Nombre de Usuario" autofocus aria-required="true">
     <input id="coreo" name="coreo" type="email" class="login-input" placeholder="Correo" aria-required="true">

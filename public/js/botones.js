@@ -55,7 +55,7 @@ const handleDragOver = (evt) => {
 
 const Datos = (data) => {
     console.log("valor: "+data.valor);
-    $("carrito").html(data.valor);
+    $("#screen").html(data.valor);
 }
 
 
@@ -82,7 +82,7 @@ const buscfactTemplate = `
       <nav class="carrito_fact">
       <h4>Factura numero : <%=i%>  ,Correspondiente a: <%=name%></h4>
       <textarea cols="95" rows="5"><%=fact.factura%></textarea>
-      
+      <!--h4>Con un importe de: <%=total%>€</h4-->
       <%++i%>
       </nav>
       <%});%>
@@ -223,9 +223,9 @@ $('button.login-buttonc').each( (_,y) => {
 //*************************** Calculadora**********************************    
    
     $("#igual").click( () => {
-        console.log("\n\n Mostrando screen dentro de igual: "+carrito.value+"\n\n");
+        console.log("\n\n Mostrando screen dentro de igual: "+screen.value+"\n\n");
          $.get("/conv", /* Request AJAX para que se calcule la tabla lo devuleve a app*/
-          { input: carrito.value },
+          { input: screen.value },
            Datos,//funcion que pasamos para guardar nuestro dato(mas arriba declarada)
           'json'
         );
@@ -283,8 +283,7 @@ $('button.login-buttonc').each( (_,y) => {
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
-    $("p2").click(() => {
-        
+    $("#p2").click(() => {
         var valor = parseFloat(document.getElementById("i2").value);
         var precio = parseFloat(valor * 9.55).toFixed(2) ;
         
@@ -314,7 +313,7 @@ $('button.login-buttonc').each( (_,y) => {
         ALL_TEXT += nuevo;
         $("#carrito").val(ALL_TEXT);
     });
-    $("f2").click(() => {
+    $("#f2").click(() => {
         var valor = parseFloat(document.getElementById("i2").value);
         var precio = parseFloat(valor * 1.85).toFixed(2) ;
         
@@ -341,11 +340,11 @@ $('button.login-buttonc').each( (_,y) => {
 
     // Setup the drag and drop listeners.
     //var dropZone = document.getElementsByClassName('drop_zone')[0];
-    let dropZone = $('.drop_zone')[0];
-    dropZone.addEventListener('dragover', handleDragOver, false);
-    dropZone.addEventListener('drop', handleDragFileSelect, false);
-    let inputFile = $('.inputfile')[0];
-    inputFile.addEventListener('change', handleFileSelect, false);
+    // let dropZone = $('.drop_zone')[0];
+    // dropZone.addEventListener('dragover', handleDragOver, false);
+    // dropZone.addEventListener('drop', handleDragFileSelect, false);
+    // let inputFile = $('.inputfile')[0];
+    // inputFile.addEventListener('change', handleFileSelect, false);
 
 
  });

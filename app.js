@@ -28,12 +28,12 @@ app.get('/', (request, response) => {
 
 //Registrarse por primera vez
 app.get('/registro', function(request, response){
-      response.render('registro', {title: "Registrese", error:""});
+      response.render('registro', {title: "Registro", error:""});
 });
 
 //Inicicar sesion
 app.get('/iniciar', function(request, response){
-      response.render('iniciar', {title: "Logeese", error:""});
+      response.render('iniciar', {title: "Inicio sesión", error:""});
 });
 
 //Pagina principal super
@@ -44,7 +44,11 @@ app.get('/superprincipal', function(request, response){
 
 //renderiza la pagina de la calculadora
 app.get('/calculadora', (request, response) => {
-  response.render('calculadora',  {title : 'Calculadora myApp', error:"" })
+  response.render('calculadora',  {title : 'Calculadora myApp', error:"" });
+});
+
+app.get('/club', (request, response) => {
+    response.render('club', {title: 'Club_APP', error:""});
 });
 
 
@@ -74,6 +78,10 @@ app.get('/error', function(request, response){
       response.render('error', {title: "No existe en la BDD", error:""});
 });
 
+app.get('/info', function(request, response) {
+    response.render('info', {title: "Supermercado APP", error: ""});
+});
+
 /*****/
 
 
@@ -92,34 +100,7 @@ app.param('usuario',function(request,response,next,name){ //param (guardar dato 
     next();
 });
 
-// //gardamos la contrasenia en el server
-// app.param('contrasenia',function(request,response,next,contrasenia){ //param (guardar dato en el midelware)
 
-//     console.log("CONTRASENIA PARAMs: "+ contrasenia);
-//     if (contrasenia.match(/^[a-z0-9_]*$/i)) { 
-//       request.contrasenia = contrasenia;
-//       console.log("request: "+ request.contrasenia);
-//     } else {  
-//       next(new Error(`<${contrasenia}> does not match 'usuario' requirements`));
-//     }
-//     next();
-// });
-
-// //guardamos el correo en el server
-// app.param('correo',function(request,response,next,correo){ //param (guardar dato en el midelware)
-
-//     console.log("CoRREO PARAMs: "+ correo);
-//     //if (correo.match(/^[a-z0-9_]*$/i)) { 
-//       request.correo = correo;
-//       console.log("request: "+ request.correo);
-//     //} else {  
-//     //  next(new Error(`<${correo}> does not match 'usuario' requirements`));
-//     //}
-//     next();
-// });
-
-
-//PRUEBA**********************************
 
 app.get('/sesion',function(request,response,next){//Para llegar aqi primero tiene q haber un nombre en la etiqueta name_user
     console.log("NOMBRE EN SESION: "+request.query.name);
